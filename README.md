@@ -1,2 +1,3 @@
-# Greek_gods_family_tree
+# Greek gods family tree
+
 An interactive family tree for the Greek Mythology
