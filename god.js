@@ -1,8 +1,8 @@
 class God{
-    constructor(gName,Class,textClass,image){
-        this.name = gName;
-        this.class = Class;
-        this.textClass = textClass;
+    constructor(gName,x,y,image){
+        this.greekName = gName;
+        this.x = x;
+        this.y = y;
         this.image = image;
 //        this.romanName = rName;
 //        this.godType = type;
@@ -11,11 +11,25 @@ class God{
 //        this.image = picture;
     }
     
-    viewCard(){}
+    clickCard(){
+        console.log("clicked");
+    }
     
-    hover(){}
+    //God cards
+    view(){ 
+    tree.append("rect") //add card
+        .attr("x",this.x)
+        .attr("y",this.y)
+        .attr("godName",this.greekName)
+    tree.append("text") //text
+        .text(this.greekName)
+        .attr("x",this.x)
+        .attr("y",this.y+20);
+    }
     
-    click(){}
+    hover(){
+    
+    }
 }
 
 //static get variable () {

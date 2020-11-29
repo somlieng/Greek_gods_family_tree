@@ -1,189 +1,82 @@
-let options;
-let data;
-let familyTree;
-let jsonObj = [];
+let width = window.innerWidth;
+let height = window.innerHeight;
 
-function makeOptions(){
-    return options = {
-        target: "#familyTree",
-        debug: true,
-        hideMarriageNodes: true,
-        marriageNodeSize: 10,
-        nodeWidth: 100,
-        nodeHeight: 200,
-        height: 800,
-        width: 1200,
-        callbacks: {
-//            nodeRenderer: function(name, x, y, height, width, extra, id, nodeClass, textClass, textRenderer) {
-//                let node = '';
-//                    node += '<div ';
-//                    node += 'style="height:100%;width:100%;" ';
-//                    node += 'class="' + nodeClass + '" ';
-//                    node += 'id="node' + id + '">\n';
-//                    node += '<img src="'+"img/corgi.jpeg"+'"';
-//                    node += '>';
-//                    node += textRenderer(name, extra, textClass);
-//                    node += '</div>';
-//                return node;
-//            }
-        }
-    }
-}
+let tree = d3.select("#familyTree").append("svg")
+             .attr("width",width)
+             .attr("height",height)
+             .append("g");
+
+let familyTree = [];
 
 //make a shit ton of gods
-let Chaos = new God("Chaos","woman","nodeText","img/corgi.jpeg");
-let Tartarus = new God("Tartarus","man","nodeText","img/corgi.jpeg");
-let Gaia = new God("Gaia","woman","nodeText","img/corgi.jpeg");
-let Eros = new God("Eros","man","nodeText","img/corgi.jpeg");
-let Erebus = new God("Erebus","man","nodeText","img/corgi.jpeg");
-let Nyx = new God("Nyx","woman","nodeText","img/corgi.jpeg");
-let Typhon = new God("Typhon","man","nodeText","img/corgi.jpeg");
+let Chaos = new God("Chaos",width/2,50,"img/corgi.jpeg");
+let Tartarus = new God("Tartarus",20,150,"img/corgi.jpeg");
+let Gaia = new God("Gaia",120,150,"img/corgi.jpeg");
+let Eros = new God("Eros",220,150,"img/corgi.jpeg");
+let Erebus = new God("Erebus",320,150,"img/corgi.jpeg");
+let Nyx = new God("Nyx",420,150,"img/corgi.jpeg");
+let Typhon = new God("Typhon",(Tartarus.x+Gaia.x)/2,300,"img/corgi.jpeg");
 
-//gName,Class,textClass
+//push them into an array
+familyTree.push(Chaos);
+familyTree.push(Tartarus);
+familyTree.push(Gaia);
+familyTree.push(Eros);
+familyTree.push(Erebus);
+familyTree.push(Nyx);
+familyTree.push(Typhon);
 
-jsonObj = [{
-  name: Chaos.name, 
-  class: Chaos.class,             
-  textClass: Chaos.textClass,                
-  marriages: [{                          
-    spouse: {                             
-      name: Chaos.name,
-      class: Chaos.class
-    },
-    children: [{                          
-      name: Tartarus.name,
-      class: Tartarus.class,             
-      textClass: Tartarus.textClass,
-        marriages: [{                          
-        spouse: {                             
-          name: Gaia.name,
-          class: Gaia.class
-        },
-        children: [{                          
-          name: Typhon.name,
-          class: Typhon.class,             
-          textClass: Tartarus.textClass,
-          }
-        ]
-        } //ends Tartarus-Gaia marriage
-       ],
-      extra: {
-        image:Tartarus.image
-        } 
-    },{
-      name: Gaia.name,
-      class: Gaia.class,             
-      textClass: Gaia.textClass,
-      extra: {
-        image:Gaia.image
-      } 
-    },{
-      name: Eros.name,
-      class: Eros.class,             
-      textClass: Eros.textClass,
-      extra: {
-        image:Eros.image
-      } 
-    },{
-      name: Erebus.name,
-      class: Erebus.class,             
-      textClass: Erebus.textClass,
-      extra: {
-        image:Erebus.image
-      } 
-    },{
-      name: Nyx.name,
-      class: Nyx.class,             
-      textClass: Nyx.textClass,
-      extra: {
-        image:Nyx.image
-      } 
-    }
-    ]
-  }
-  ],
-  extra: {
-    image:Chaos.image
-  }                               
-}]
+//make Cards
+for(let god of familyTree){
+    god.view();
+}
 
-makeOptions();
+//click interaction
+tree.selectAll('rect')
+    .on('click',function(d, i) { 
+    var godData = d.srcElement.attributes;
+    var name = godData.godName.value
+    console.log(name);
+    var modal = new Modal(name);
+    d3.select('#modalContainer').html(modal.html);
+    document.getElementById(name).style.display='block';
+});
 
-familyTree = dTree.init(jsonObj,options);
+//make Modal object
+function Modal(name) {
+    
+//   var source;
+//   if(thumbnail === ""){
+//        source = 'img/bred_sheeran.jpg'
+//    } else{
+//        source = thumbnail};    
+    
+  this.html = 
+    `<div id="${name}" class="w3-modal">
+        <div class="w3-modal-content">
+            <header class="w3-container w3-teal"> 
+                <span onclick="document.getElementById('${name}').style.display='none'"class="w3-button w3-display-topright">&times;</span>
+                <h2>${name}</h2>
+            </header>
+          <div class="w3-container">
+            <p>${name}</p>
+          </div>
+        </div>
+    </div>`;
+}
 
-//familyTree = d3.json("familyTree.js", function(error, treeData) {
-//      	dTree.init(treeData,options);
-//    	});
+function makeConnections(input){
+   let line = tree.append("path")
+                  .attr("d",pathMaker(input));
+}
 
+function pathMaker(input){
+    return  "M"+input.source.x+","+input.source.y+
+            "v 100"+
+            "H"+input.target.x+
+            "V"+input.target.y
+}
 
-
-//let width = window.innerWidth;
-//let height = window.innerHeight;
-//
-//let tree = d3.select("#familyTree").append("svg")
-//             .attr("width",width)
-//             .attr("height",height);
-//
-//let data;
-//let familyTree;
-//let familyInfo;
-//let zoom;
-//
-////call family tree creator
-//makeTree();
-//
-//async function makeTree(){
-//    data = await prepareData('familyTree.csv','greekName','parent');
-//    familyTree = d3.tree().size([width,600]);
-//    familyInfo = familyTree(data);
-//    console.log(familyInfo);
-//    console.log(familyInfo.descendants());
-//    console.log(familyInfo.links());
-//    //get descendents
-//    let info = await familyInfo.descendants(); 
-//    //make cards
-//    for(let i = 0; i<info.length;i++){ 
-//        makeCards(info[i]);
-//    }
-//    //get links
-//    let link = await familyInfo.links();
-//    //make connections
-//    for(let i = 0; i<link.length;i++){ 
-//        makeConnections(link[i]);
-//    }
-//}
-//
-//async function prepareData(source,nameKey,parentKey){
-//    let input = await d3.csv(source);
-//    data = await d3.stratify()
-//             .id(d => d[nameKey])
-//             .parentId(d => d[parentKey])
-//             (input)
-//    return data;
-//}
-//
-//function makeCards(source){
-//    tree.append("rect") //rect background
-//        .attr("x",source.x)
-//        .attr("y",source.y);
-//    tree.append("text") //text
-//        .text(source.data.greekName)
-//        .attr("x",source.x)
-//        .attr("y",source.y+15);
-//}
-//
-//function makeConnections(input){
-//   let line = tree.append("path")
-//                  .attr("d",pathMaker(input));
-//}
-//
-//function pathMaker(input){
-//    return  "M"+input.source.x+","+input.source.y+
-//            "v 100"+
-//            "H"+input.target.x+
-//            "V"+input.target.y
-//}
-//
-//function isSpouse(input){
-//    
-//}
+function isSpouse(input){
+    
+}
