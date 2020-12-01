@@ -29,6 +29,12 @@ class God{
         .text(this.greekName)
         .attr("x",this.x)
         .attr("y",this.y+20);
+    tree.append("svg:image")
+        .attr("xlink:href",this.image)
+        .attr("x", this.x)
+        .attr("y", this.y+20)
+        .attr("height", 50)
+        .attr("width", 50);
     }
     
     hover(){

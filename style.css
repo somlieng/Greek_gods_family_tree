@@ -3,8 +3,9 @@ rect{
     stroke:black;
 }
 
-path{
+.main{
     fill:none;
     stroke:black;
+    stroke-width: 2px;
 }
 

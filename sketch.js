@@ -94,9 +94,9 @@ function parentChild(source,target,name){
 }
 
 function pathMaker(source,target){
-    return  "M"+source.x+","+source.y+
-            "v 50"+
-            "H"+target.x+
+    return  "M"+(source.x+cardWidth/2)+","+(source.y+cardHeight)+
+            "v 20"+
+            "H"+(target.x+cardWidth/2)+
             "V"+target.y
 }
 
