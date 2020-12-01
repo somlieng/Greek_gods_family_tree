@@ -1,5 +1,19 @@
-let width = window.innerWidth;
-let height = window.innerHeight;
+let margins = {top:50,
+               bottom: 50,
+               left: 50,
+               right:50};
+
+let width = window.innerWidth-margins.left-margins.right;
+let height = window.innerHeight-margins.top;
+
+let cardWidth = 100;
+let cardHeight = 100;
+
+let cardTopSpace = 50;
+let betweenCards = 50;
+
+let cardAbove = cardHeight+cardTopSpace;
+let cardLeft = cardWidth+betweenCards;
 
 let tree = d3.select("#familyTree").append("svg")
              .attr("width",width)
@@ -8,20 +22,23 @@ let tree = d3.select("#familyTree").append("svg")
 
 let familyTree = [];
 
+let lineType = {main:"main",
+                child:"child"};
+
 //make a shit ton of gods
-let Chaos = new God("Chaos",width/2,50,"img/corgi.jpeg");
-let Tartarus = new God("Tartarus",20,150,"img/corgi.jpeg");
-let Gaia = new God("Gaia",120,150,"img/corgi.jpeg");
-let Eros = new God("Eros",220,150,"img/corgi.jpeg");
-let Erebus = new God("Erebus",320,150,"img/corgi.jpeg");
-let Nyx = new God("Nyx",420,150,"img/corgi.jpeg");
-let Typhon = new God("Typhon",(Tartarus.x+Gaia.x)/2,300,"img/corgi.jpeg");
+let Chaos = new God("Chaos",width/2-cardWidth/2,margins.top,"img/corgi.jpeg",cardWidth,cardHeight);
+let ErosElder = new God("Eros Elder",margins.left,Chaos.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
+let Tartarus = new God("Tartarus",ErosElder.x+cardLeft,Chaos.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
+let Gaia = new God("Gaia",width/2-cardWidth/2,Chaos.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
+let Erebus = new God("Erebus",Gaia.x+cardLeft,Chaos.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
+let Nyx = new God("Nyx",Erebus.x+cardLeft,Chaos.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
+let Typhon = new God("Typhon",(Tartarus.x+Gaia.x)/2,Tartarus.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
 
 //push them into an array
 familyTree.push(Chaos);
 familyTree.push(Tartarus);
 familyTree.push(Gaia);
-familyTree.push(Eros);
+familyTree.push(ErosElder);
 familyTree.push(Erebus);
 familyTree.push(Nyx);
 familyTree.push(Typhon);
@@ -30,6 +47,9 @@ familyTree.push(Typhon);
 for(let god of familyTree){
     god.view();
 }
+
+//make Connections
+parentChild(Chaos,Tartarus,lineType.main);
 
 //click interaction
 tree.selectAll('rect')
@@ -65,16 +85,19 @@ function Modal(name) {
     </div>`;
 }
 
-function makeConnections(input){
+function parentChild(source,target,name){
    let line = tree.append("path")
-                  .attr("d",pathMaker(input));
+                  .attr("class",name)
+                  .attr("d",pathMaker(source,target));
+   console.log("LINE");
+    return line;
 }
 
-function pathMaker(input){
-    return  "M"+input.source.x+","+input.source.y+
-            "v 100"+
-            "H"+input.target.x+
-            "V"+input.target.y
+function pathMaker(source,target){
+    return  "M"+source.x+","+source.y+
+            "v 50"+
+            "H"+target.x+
+            "V"+target.y
 }
 
 function isSpouse(input){
