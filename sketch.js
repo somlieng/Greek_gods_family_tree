@@ -23,7 +23,10 @@ let tree = d3.select("#familyTree").append("svg")
 let familyTree = [];
 
 let lineType = {main:"main",
-                child:"child"};
+                child:"child",
+                personification:"personification"};
+
+let godMap = {};
 
 //make a shit ton of gods
 let Chaos = new God("Chaos",width/2-cardWidth/2,margins.top,"img/corgi.jpeg",cardWidth,cardHeight);
@@ -43,24 +46,74 @@ familyTree.push(Erebus);
 familyTree.push(Nyx);
 familyTree.push(Typhon);
 
-//make Cards
+//make Cards and push into godMap
 for(let god of familyTree){
     god.view();
+    godMap[god.greekName] = god;
 }
 
-//make Connections
-parentChild(Chaos,Tartarus,lineType.main);
+//console.log(godMap);
+
+//make parent child connections
+pathMaker(parentChild,Chaos,ErosElder,lineType.main,"ChaosErosE");
+pathMaker(parentChild,Chaos,Tartarus,lineType.main,"ChaosTar");
+pathMaker(parentChild,Chaos,Gaia,lineType.main,"ChaosGaia");
+pathMaker(parentChild,Chaos,Erebus,lineType.main,"ChaosEre");
+pathMaker(parentChild,Chaos,Nyx,lineType.main,"ChaosNyx");
+
+//make spouse connections
+pathMaker(spousePath,Gaia,Tartarus,lineType.personification,"GaiaTar");
+pathMaker(spousePath,Nyx,Erebus,lineType.personification,"NyxEre");
 
 //click interaction
 tree.selectAll('rect')
     .on('click',function(d, i) { 
     var godData = d.srcElement.attributes;
-    var name = godData.godName.value
-    console.log(name);
+    var name = godData.godName.value;
     var modal = new Modal(name);
     d3.select('#modalContainer').html(modal.html);
     document.getElementById(name).style.display='block';
-});
+    });
+
+//hightlight children
+function childrenHighlight(parent,event){
+    for(let child of parent.children){
+        var color = (event === 'mouseover') ? 'red' : 'black';
+        document.getElementById(child).style.stroke= color ;
+    }
+}
+
+//highlight spouse
+function spouseHighlight(wife,husband){
+    for(let child of parent.children){
+        var color = (event === 'mouseover') ? 'red' : 'black';
+        document.getElementById(child).style.stroke= color ;
+    }
+}
+
+//mouse over interaction
+tree.selectAll('rect')
+    .on('mouseover',function(d, i) { 
+        var godData = d.srcElement.attributes;
+        var name = godData.godName.value;
+        childrenHighlight(godMap[name],'mouseover');
+        d3.select(this)
+        .transition()
+//        .attr("width",cardWidth+20)
+//        .attr("height",cardHeight+20)
+    });
+
+//mouse out interaction
+tree.selectAll('rect')
+    .on('mouseout',function(d, i) {
+        var godData = d.srcElement.attributes;
+        var name = godData.godName.value;
+        childrenHighlight(godMap[name],'mouseout');
+        d3.select(this)
+        .transition()
+//        .attr("width",cardWidth)
+//        .attr("height",cardHeight)
+    });
 
 //make Modal object
 function Modal(name) {
@@ -85,21 +138,34 @@ function Modal(name) {
     </div>`;
 }
 
-function parentChild(source,target,name){
+function pathMaker(pathType,source,target,name,id){
    let line = tree.append("path")
                   .attr("class",name)
-                  .attr("d",pathMaker(source,target));
-   console.log("LINE");
-    return line;
+                  .attr("id",id)
+                  .attr("d",pathType(source,target));
+   source.children.push(id);
+   if(pathType === spousePath){
+       target.children.push(id);}
+   return line;
 }
 
-function pathMaker(source,target){
+//Parent child path function
+function parentChild(source,target){
     return  "M"+(source.x+cardWidth/2)+","+(source.y+cardHeight)+
             "v 20"+
             "H"+(target.x+cardWidth/2)+
             "V"+target.y
 }
 
-function isSpouse(input){
-    
+//Spouse path function
+function spousePath(source,target){
+    if(source.x !== target.x){
+     return  "M"+(source.x+cardWidth/2)+","+(source.y+cardHeight)+
+            "v 20"+
+            "H"+(target.x+cardWidth/2)+
+            "V"+(target.y+cardHeight)
+    }
+    return  "M"+(source.x+cardWidth/2)+","+(source.y+cardHeight)+
+            "H"+(target.x+cardWidth/2)+
+            "V"+(target.y+cardHeight)
 }

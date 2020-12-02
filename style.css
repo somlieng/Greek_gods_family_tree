@@ -9,3 +9,10 @@ rect{
     stroke-width: 2px;
 }
 
+.personification{
+    fill:none;
+    stroke:black;
+    stroke-width: 2px;
+    stroke-dasharray: 5;
+}
+

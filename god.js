@@ -1,11 +1,12 @@
 class God{
-    constructor(gName,x,y,image,width,height){
+    constructor(gName,x,y,image,width,height,children){
         this.greekName = gName;
         this.x = x;
         this.y = y;
         this.image = image;
         this.width = width;
         this.height = height;
+        this.children = [];
 //        this.romanName = rName;
 //        this.godType = type;
 //        this.godTitle = title;
@@ -23,6 +24,7 @@ class God{
         .attr("x",this.x)
         .attr("y",this.y)
         .attr("godName",this.greekName)
+        .attr("children",this.children)
         .attr("width",this.width)
         .attr("height",this.height)
     tree.append("text") //text
