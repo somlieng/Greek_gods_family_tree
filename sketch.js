@@ -12,6 +12,8 @@ let cardHeight = 100;
 let cardTopSpace = 50;
 let betweenCards = 50;
 
+let downLink = 20;
+
 let cardAbove = cardHeight+cardTopSpace;
 let cardLeft = cardWidth+betweenCards;
 
@@ -24,7 +26,8 @@ let familyTree = [];
 
 let lineType = {main:"main",
                 child:"child",
-                personification:"personification"};
+                personification:"personification",
+                monster:"monster"};
 
 let godMap = {};
 
@@ -54,16 +57,19 @@ for(let god of familyTree){
 
 //console.log(godMap);
 
-//make parent child connections
-pathMaker(parentChild,Chaos,ErosElder,lineType.main,"ChaosErosE");
-pathMaker(parentChild,Chaos,Tartarus,lineType.main,"ChaosTar");
-pathMaker(parentChild,Chaos,Gaia,lineType.main,"ChaosGaia");
-pathMaker(parentChild,Chaos,Erebus,lineType.main,"ChaosEre");
-pathMaker(parentChild,Chaos,Nyx,lineType.main,"ChaosNyx");
+//make chaos connections
+pathMaker(singleSource,Chaos,ErosElder,lineType.main,"ChaosErosE");
+pathMaker(singleSource,Chaos,Tartarus,lineType.main,"ChaosTar");
+pathMaker(singleSource,Chaos,Gaia,lineType.main,"ChaosGaia");
+pathMaker(singleSource,Chaos,Erebus,lineType.main,"ChaosEre");
+pathMaker(singleSource,Chaos,Nyx,lineType.main,"ChaosNyx");
 
 //make spouse connections
 pathMaker(spousePath,Gaia,Tartarus,lineType.personification,"GaiaTar");
 pathMaker(spousePath,Nyx,Erebus,lineType.personification,"NyxEre");
+
+//make child connections
+familyMaker(Gaia,Tartarus,Typhon,lineType.monster,"GaiaTartarusTyphon");
 
 //click interaction
 tree.selectAll('rect')
@@ -131,7 +137,7 @@ function Modal(name) {
 }
 
 function pathMaker(pathType,source,target,name,id){
-   let line = tree.append("path")
+  let line = tree.append("path")
                   .attr("class",name)
                   .attr("id",id)
                   .attr("d",pathType(source,target));
@@ -141,23 +147,36 @@ function pathMaker(pathType,source,target,name,id){
    return line;
 }
 
-//Parent child path function
-function parentChild(source,target){
+function familyMaker(wife,husband,child,name,id){
+  let line = tree.append("path")
+                  .attr("class",name)
+                  .attr("id",id)
+                  .attr("d",parentsChild(wife,husband,child));
+   wife.children.push(id);
+   husband.children.push(id);
+   return line;
+}
+
+//Only 1 parent
+function singleSource(source,target){
     return  "M"+(source.x+cardWidth/2)+","+(source.y+cardHeight)+
-            "v 20"+
+            "v"+downLink+
             "H"+(target.x+cardWidth/2)+
             "V"+target.y
 }
 
 //Spouse path function
 function spousePath(source,target){
-    if(source.x !== target.x){
      return  "M"+(source.x+cardWidth/2)+","+(source.y+cardHeight)+
-            "v 20"+
+            "v"+downLink+
             "H"+(target.x+cardWidth/2)+
             "V"+(target.y+cardHeight)
-    }
-    return  "M"+(source.x+cardWidth/2)+","+(source.y+cardHeight)+
-            "H"+(target.x+cardWidth/2)+
-            "V"+(target.y+cardHeight)
+}
+
+//2 parents to child
+function parentsChild(wife,husband,child){
+    return "M"+((wife.x+husband.x+cardWidth)/2)+","+(wife.y+cardHeight+downLink)+
+            "v"+downLink+
+            "H"+(child.x+cardWidth/2)+
+            "V"+(child.y)
 }
