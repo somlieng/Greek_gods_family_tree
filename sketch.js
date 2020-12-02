@@ -18,8 +18,8 @@ let cardAbove = cardHeight+cardTopSpace;
 let cardLeft = cardWidth+betweenCards;
 
 let tree = d3.select("#familyTree").append("svg")
-             .attr("width",width)
-             .attr("height",height)
+             .attr("width",window.innerWidth)//width
+             .attr("height",window.innerHeight)
              .append("g");
 
 let familyTree = [];
@@ -27,18 +27,53 @@ let familyTree = [];
 let lineType = {main:"main",
                 child:"child",
                 personification:"personification",
-                monster:"monster"};
+                monster:"monster",
+                earth:"earth",
+                water:"water",
+                sky:"sky"};
 
 let godMap = {};
 
-//make a shit ton of gods
-let Chaos = new God("Chaos",width/2-cardWidth/2,margins.top,"img/corgi.jpeg",cardWidth,cardHeight);
-let ErosElder = new God("Eros Elder",margins.left,Chaos.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
-let Tartarus = new God("Tartarus",ErosElder.x+cardLeft,Chaos.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
-let Gaia = new God("Gaia",width/2-cardWidth/2,Chaos.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
-let Erebus = new God("Erebus",Gaia.x+cardLeft,Chaos.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
-let Nyx = new God("Nyx",Erebus.x+cardLeft,Chaos.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
-let Typhon = new God("Typhon",(Tartarus.x+Gaia.x)/2,Tartarus.y+cardAbove,"img/corgi.jpeg",cardWidth,cardHeight);
+let center = width/2-cardWidth/2;
+
+//************make a shit ton of gods************//
+
+//level 1 god
+let Chaos = new God("Chaos",center,margins.top,"img/corgi.jpeg",cardWidth,cardHeight);
+
+let level2 = Chaos.y+cardAbove;
+
+//level 2 gods
+let ErosElder = new God("Eros Elder",margins.left,level2,"img/corgi.jpeg",cardWidth,cardHeight);
+let Tartarus = new God("Tartarus",ErosElder.x+cardLeft,level2,"img/corgi.jpeg",cardWidth,cardHeight);
+let Gaia = new God("Gaia",center,level2,"img/corgi.jpeg",cardWidth,cardHeight);
+let Erebus = new God("Erebus",Gaia.x+cardLeft,level2,"img/corgi.jpeg",cardWidth,cardHeight);
+let Nyx = new God("Nyx",Erebus.x+cardLeft,level2,"img/corgi.jpeg",cardWidth,cardHeight);
+
+let level3 = Gaia.y+cardAbove;
+
+//level 3 gods
+let Typhon = new God("Typhon",margins.left,level3,"img/corgi.jpeg",cardWidth,cardHeight);
+let Ourea = new God("Ourea",center-cardLeft,level3,"img/corgi.jpeg",cardWidth,cardHeight);
+let Uranus = new God("Uranus",center,level3,"img/corgi.jpeg",cardWidth,cardHeight);
+let Pontus = new God("Pontus",center+cardLeft,level3,"img/corgi.jpeg",cardWidth,cardHeight);
+
+let level4 = Uranus.y+cardAbove;
+
+//level 4 gods
+let Kronos = new God("Kronos",(center-cardWidth/2)-20,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+let Rhea = new God("Rhea",(center+cardWidth/2)+20,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+let Crius = new God("Crius",Kronos.x-cardLeft,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+let Theia = new God("Theia",Crius.x-cardLeft,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+let Hyperion = new God("Hyperion",Theia.x-cardLeft,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+let Tethys = new God("Tethys",Hyperion.x-cardLeft,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+let Oceanus = new God("Oceanus",Tethys.x-cardLeft,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+let Themis = new God("Themis",Rhea.x+cardLeft,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+let Iapetus = new God("Iapetus",Themis.x+cardLeft,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+let Mnemosyne = new God("Mnemosyne",Iapetus.x+cardLeft,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+let Coeus = new God("Coeus",Mnemosyne.x+cardLeft,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+let Phoebe = new God("Phoebe",Coeus.x+cardLeft,level4,"img/corgi.jpeg",cardWidth,cardHeight);
+
 
 //push them into an array
 familyTree.push(Chaos);
@@ -48,28 +83,61 @@ familyTree.push(ErosElder);
 familyTree.push(Erebus);
 familyTree.push(Nyx);
 familyTree.push(Typhon);
+familyTree.push(Ourea);
+familyTree.push(Uranus);
+familyTree.push(Pontus);
+familyTree.push(Kronos);
+familyTree.push(Rhea);
+familyTree.push(Crius);
+familyTree.push(Theia);
+familyTree.push(Hyperion);
+familyTree.push(Tethys);
+familyTree.push(Oceanus);
+familyTree.push(Themis);
+familyTree.push(Iapetus);
+familyTree.push(Mnemosyne);
+familyTree.push(Coeus);
+familyTree.push(Phoebe);
+
+//make single Parent
+pathMaker(singleParent,Chaos,ErosElder,lineType.main,"child","ChaosErosE");
+pathMaker(singleParent,Chaos,Tartarus,lineType.main,"child","ChaosTar");
+pathMaker(singleParent,Chaos,Gaia,lineType.main,"child","ChaosGaia");
+pathMaker(singleParent,Chaos,Erebus,lineType.main,"child","ChaosEre");
+pathMaker(singleParent,Chaos,Nyx,lineType.main,"child","ChaosNyx");
+pathMaker(singleParent,Gaia,Ourea,lineType.earth,"child","GaiaOurea");
+pathMaker(singleParent,Gaia,Pontus,lineType.water,"child","GaiaPontus");
+pathMaker(singleParent,Gaia,Uranus,lineType.sky,"child","GaiaUra");
+
+//make spouse connections
+pathMaker(spousePath,Gaia,Tartarus,lineType.personification,"spouse","GaiaTar");
+pathMaker(spousePath,Nyx,Erebus,lineType.personification,"spouse","NyxEre");
+pathMaker(spouseIncest,Gaia,Uranus,lineType.main,"spouse","GaiaUra2");
+pathMaker(spousePath,Oceanus,Tethys,lineType.main,"spouse","OceTeth");
+pathMaker(spousePath,Hyperion,Theia,lineType.main,"spouse","HypTheia");
+pathMaker(spousePath,Coeus,Phoebe,lineType.main,"spouse","CoeusPhoebe");
+pathMaker(spousePath,Kronos,Rhea,lineType.main,"spouse","KroRhea");
+
+//make child connections
+familyMaker(Gaia,Tartarus,Typhon,lineType.monster,"GaiaTartarusTyphon");
+familyMaker(Gaia,Uranus,Rhea,lineType.main,"GaiaUranusRhea");
+familyMaker(Gaia,Uranus,Kronos,lineType.main,"GaiaUranusKronos");
+familyMaker(Gaia,Uranus,Crius,lineType.main,"GaiaUranusCrius");
+familyMaker(Gaia,Uranus,Theia,lineType.main,"GaiaUranusTheia");
+familyMaker(Gaia,Uranus,Hyperion,lineType.main,"GaiaUranusHyp");
+familyMaker(Gaia,Uranus,Tethys,lineType.main,"GaiaUranusTethys");
+familyMaker(Gaia,Uranus,Oceanus,lineType.main,"GaiaUranusOcean");
+familyMaker(Gaia,Uranus,Themis,lineType.main,"GaiaUranusThemis");
+familyMaker(Gaia,Uranus,Iapetus,lineType.main,"GaiaUranusIap");
+familyMaker(Gaia,Uranus,Mnemosyne,lineType.main,"GaiaUranusMnem");
+familyMaker(Gaia,Uranus,Coeus,lineType.main,"GaiaUranusCoeus");
+familyMaker(Gaia,Uranus,Phoebe,lineType.main,"GaiaUranusPhoebe");
 
 //make Cards and push into godMap
 for(let god of familyTree){
     god.view();
     godMap[god.greekName] = god;
 }
-
-//console.log(godMap);
-
-//make chaos connections
-pathMaker(singleSource,Chaos,ErosElder,lineType.main,"ChaosErosE");
-pathMaker(singleSource,Chaos,Tartarus,lineType.main,"ChaosTar");
-pathMaker(singleSource,Chaos,Gaia,lineType.main,"ChaosGaia");
-pathMaker(singleSource,Chaos,Erebus,lineType.main,"ChaosEre");
-pathMaker(singleSource,Chaos,Nyx,lineType.main,"ChaosNyx");
-
-//make spouse connections
-pathMaker(spousePath,Gaia,Tartarus,lineType.personification,"GaiaTar");
-pathMaker(spousePath,Nyx,Erebus,lineType.personification,"NyxEre");
-
-//make child connections
-familyMaker(Gaia,Tartarus,Typhon,lineType.monster,"GaiaTartarusTyphon");
 
 //click interaction
 tree.selectAll('rect')
@@ -136,14 +204,22 @@ function Modal(name) {
     </div>`;
 }
 
-function pathMaker(pathType,source,target,name,id){
+function pathMaker(pathType,source,target,name,union,id){
   let line = tree.append("path")
-                  .attr("class",name)
+                  .attr("class",name+" "+union)
                   .attr("id",id)
                   .attr("d",pathType(source,target));
-   source.children.push(id);
-   if(pathType === spousePath){
-       target.children.push(id);}
+    if(pathType === singleParent){
+        source.children.push(id);
+    }
+    if(pathType === spousePath){
+        source.spouse.push(id);
+        target.spouse.push(id);
+    }
+    if(pathType === spouseIncest){
+        source.spouse.push(id);
+        target.spouse.push(id);
+    }
    return line;
 }
 
@@ -158,7 +234,7 @@ function familyMaker(wife,husband,child,name,id){
 }
 
 //Only 1 parent
-function singleSource(source,target){
+function singleParent(source,target){
     return  "M"+(source.x+cardWidth/2)+","+(source.y+cardHeight)+
             "v"+downLink+
             "H"+(target.x+cardWidth/2)+
@@ -169,6 +245,16 @@ function singleSource(source,target){
 function spousePath(source,target){
      return  "M"+(source.x+cardWidth/2)+","+(source.y+cardHeight)+
             "v"+downLink+
+            "H"+(target.x+cardWidth/2)+
+            "V"+(target.y+cardHeight)
+}
+
+//Spouse path function
+function spouseIncest(source,target){
+     return  "M"+(source.x+cardWidth/2)+","+(source.y+cardHeight)+
+            "v"+downLink+
+            "H"+(target.x-20)+
+            "V"+(target.y+cardHeight+downLink)+
             "H"+(target.x+cardWidth/2)+
             "V"+(target.y+cardHeight)
 }

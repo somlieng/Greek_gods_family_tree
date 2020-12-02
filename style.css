@@ -9,17 +9,37 @@ rect{
     stroke-width: 2px;
 }
 
-.personification{
-    fill:none;
-    stroke:black;
+.spouse{
     stroke-width: 2px;
     stroke-dasharray: 5;
 }
 
-.monster{
+.child{
+    stroke-width: 2px;
+}
+
+.personification{
     fill:none;
     stroke:black;
-    stroke-width: 2px;
-    stroke-dasharray: 5;
+}
+
+.monster{
+    fill:none;
+    stroke:brown;
+}
+
+.sky{
+    fill:none;
+    stroke:blue;
+}
+
+.earth{
+    fill:none;
+    stroke:green;
+}
+
+.water{
+    fill:none;
+    stroke:black;
 }
 

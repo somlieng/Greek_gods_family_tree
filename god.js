@@ -1,5 +1,5 @@
 class God{
-    constructor(gName,x,y,image,width,height,children){
+    constructor(gName,x,y,image,width,height,children,spouse){
         this.greekName = gName;
         this.x = x;
         this.y = y;
@@ -7,6 +7,7 @@ class God{
         this.width = width;
         this.height = height;
         this.children = [];
+        this.spouse = [];
 //        this.romanName = rName;
 //        this.godType = type;
 //        this.godTitle = title;
