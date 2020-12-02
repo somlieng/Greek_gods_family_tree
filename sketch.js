@@ -76,15 +76,7 @@ tree.selectAll('rect')
     });
 
 //hightlight children
-function childrenHighlight(parent,event){
-    for(let child of parent.children){
-        var color = (event === 'mouseover') ? 'red' : 'black';
-        document.getElementById(child).style.stroke= color ;
-    }
-}
-
-//highlight spouse
-function spouseHighlight(wife,husband){
+function highlight(parent,event){
     for(let child of parent.children){
         var color = (event === 'mouseover') ? 'red' : 'black';
         document.getElementById(child).style.stroke= color ;
@@ -96,7 +88,7 @@ tree.selectAll('rect')
     .on('mouseover',function(d, i) { 
         var godData = d.srcElement.attributes;
         var name = godData.godName.value;
-        childrenHighlight(godMap[name],'mouseover');
+        highlight(godMap[name],'mouseover');
         d3.select(this)
         .transition()
 //        .attr("width",cardWidth+20)
@@ -108,7 +100,7 @@ tree.selectAll('rect')
     .on('mouseout',function(d, i) {
         var godData = d.srcElement.attributes;
         var name = godData.godName.value;
-        childrenHighlight(godMap[name],'mouseout');
+        highlight(godMap[name],'mouseout');
         d3.select(this)
         .transition()
 //        .attr("width",cardWidth)
