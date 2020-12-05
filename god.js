@@ -28,6 +28,7 @@ class God{
         .attr("children",this.children)
         .attr("width",this.width)
         .attr("height",this.height)
+        .attr("cursor", "grab")
     tree.append("text") //text
         .text(this.greekName)
         .attr("x",this.x)
