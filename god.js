@@ -37,8 +37,8 @@ class God{
         .attr("xlink:href",this.image)
         .attr("x", this.x)
         .attr("y", this.y+20)
-        .attr("height", 50)
-        .attr("width", 50);
+        .attr("height", 40);
+//        .attr("width", 20);
     }
     
     hover(){
