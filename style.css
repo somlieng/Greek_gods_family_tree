@@ -1,13 +1,42 @@
+:root {
+  --sea: #394175;
+  --sky: #3F81AA;
+  --earth: #275031;
+  --underworld: #251B38;
+  --personification: #FD7037;
+  --monster: #FEB131;
+  --mortal: #765699;
+}
+
+text{
+    dominant-baseline: middle;
+    text-anchor: middle;
+}
+
+.text-underworld{
+    fill:white;
+}
+
 rect{
     fill:white;
-    stroke:black;
+    stroke: none;
     padding: 20px;
 }
 
-.main{
-    fill:none;
-    stroke:black;
-    stroke-width: 2px;
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.svg-content {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .spouse{
@@ -19,28 +48,66 @@ rect{
     stroke-width: 2px;
 }
 
-.personification{
+.line-personification{
     fill:none;
-    stroke:black;
+    stroke:var(--personification);
+}
+
+.personification{
+    fill:var(--personification);
+}
+
+.line-underworld{
+    fill:none;
+    stroke:var(--underworld);
+}
+
+.underworld{
+    fill:var(--underworld)
+}
+
+.line-monster{
+    fill:none;
+    stroke:var(--monster);
 }
 
 .monster{
+    fill:var(--monster)
+}
+
+.line-sky{
     fill:none;
-    stroke:brown;
+    stroke:var(--sky);
 }
 
 .sky{
+    fill:var(--sky);
+}
+
+.line-earth{
     fill:none;
-    stroke:blue;
+    stroke:var(--earth);
 }
 
 .earth{
+    fill:var(--earth);
+}
+
+.line-water{
     fill:none;
-    stroke:green;
+    stroke:var(--sea);
 }
 
 .water{
-    fill:none;
-    stroke:black;
+    fill:var(--sea);
 }
 
+.mortal{
+    fill:var(--mortal);
+}
+
+.line-main{
+    fill:none;
+    stroke:black;
+    stroke-width: 2px;
+}

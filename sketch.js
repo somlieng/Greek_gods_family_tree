@@ -21,14 +21,17 @@ let margins = {top:50,
 let width = window.innerWidth;
 let height = window.innerHeight;
 
-let regularCard = {width: 40,
-                   height:50};
+let regularCard = {width: 80,
+                   height:100,
+                   type:"regular"};
 
-let largeCard = {width: 60,
-                 height: 70};
+let largeCard = {width: 90,
+                 height: 120,
+                 type:"large"};
 
-let smallCard = {width: 50,
-               height: 30};
+let smallCard = {width: 90,
+               height: 30,
+                type:"small"};
 
 let cardWidth = 40;
 let cardHeight = 50;
@@ -38,14 +41,14 @@ let smallCardHeight = 40;
 
 let cardTopSpace = 50;
 
-let betweenCards = 25;
+let betweenCards = 20;
 let smallCardBetween = 15;
 
 let downLink = 10;
 
-let cardAbove = cardHeight+cardTopSpace;
+let cardAbove = largeCard.height+cardTopSpace;
 
-let cardSpace = cardWidth+betweenCards;
+let cardSpace = largeCard.width+betweenCards;
 let cardSpaceSmall = smallCardWidth+smallCardBetween;
 
 let centers ={regular:width/2-regularCard.width/2,
@@ -64,6 +67,8 @@ function dragging() {
 
 let tree = d3.select("#familyTree").append("svg")
              .attr("viewBox", [0, 0, width, height])
+             .attr("preserveAspectRatio", "none")
+//             .classed("svg-content", true)
              .attr("cursor", "grab")
              .call(d3.zoom() //zoom interaction
                 .extent([[0, 0], [width, height]])
@@ -74,12 +79,21 @@ let tree = d3.select("#familyTree").append("svg")
 
 let familyTree = [];
 
-let lineType = {main:"main",
-                child:"child",
-                personification:"personification",
+let lineType = {main:"line-main",
+                child:"line-child",
+                personification:"line-personification",
+                underworld:"line-underworld",
+                monster:"line-monster",
+                earth:"line-earth",
+                water:"line-water",
+                sky:"line-sky"};
+
+let godType = { personification:"personification",
                 monster:"monster",
                 earth:"earth",
                 water:"water",
+                underworld:"underworld",
+                mortal:"mortal",
                 sky:"sky"};
 
 let godMap = {};
@@ -87,23 +101,23 @@ let godMap = {};
 //************make a shit ton of gods************//
 
 //level 1 god
-let Chaos = new God("Chaos",centers.small,margins.top,null,smallCard.width,smallCard.height);
+let Chaos = new God("Chaos",centers.small,margins.top,null,smallCard.width,smallCard.height,smallCard.type,godType.underworld);
 
 let level2 = Chaos.y+cardAbove;
 
 //level 2 gods
-let Gaia = new God("Gaia",centers.large,level2,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Tartarus = new God("Tartarus",Gaia.x-(cardSpace*2),level2,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let ErosElder = new God("Eros",Tartarus.x-cardSpace,level2,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Erebus = new God("Erebus",Gaia.x+(cardSpace*2),level2,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Nyx = new God("Nyx",Erebus.x+cardSpace,level2,"img/corgi.jpeg",regularCard.width,regularCard.height);
+let Gaia = new God("Gaia",centers.large,level2,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.earth);
+let Tartarus = new God("Tartarus",Gaia.x-(cardSpace*2),level2,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.underworld);
+let ErosElder = new God("Eros",Tartarus.x-cardSpace,level2,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let Erebus = new God("Erebus",Gaia.x+(cardSpace*2),level2,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.underworld);
+let Nyx = new God("Nyx",Erebus.x+cardSpace,level2,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.underworld);
 
 let level3 = Gaia.y+cardAbove;
 
 //level 3 gods
-let Uranus = new God("Uranus",centers.large,level3,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Ourea = new God("Ourea",centers.regular-cardSpace,level3,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Pontus = new God("Pontus",centers.regular+cardSpace,level3,"img/corgi.jpeg",regularCard.width,regularCard.height);
+let Uranus = new God("Uranus",centers.large,level3,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.sky);
+let Ourea = new God("Ourea",centers.regular-cardSpace,level3,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.earth);
+let Pontus = new God("Pontus",centers.regular+cardSpace,level3,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.water);
 
 let level4 = Uranus.y+cardAbove;
 let level5 = Uranus.y+2*(cardAbove);
@@ -112,18 +126,18 @@ let level5 = Uranus.y+2*(cardAbove);
 let Typhon = new God("Typhon",margins.left,level4,"img/corgi.jpeg",smallCard.width,smallCard.height);
 
 //level 5 gods
-let Kronos = new God("Kronos",(centers.large-cardWidth/2)-(betweenCards/2),level5,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Rhea = new God("Rhea",(centers.large+cardWidth/2)+(betweenCards/2),level5,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Crius = new God("Crius",Kronos.x-cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Theia = new God("Theia",Crius.x-cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Hyperion = new God("Hyperion",Theia.x-cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Tethys = new God("Tethys",Hyperion.x-cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Oceanus = new God("Oceanus",Tethys.x-cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Themis = new God("Themis",Rhea.x+cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Iapetus = new God("Iapetus",Themis.x+cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Mnemosyne = new God("Mnemosyne",Iapetus.x+cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Coeus = new God("Coeus",Mnemosyne.x+cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Phoebe = new God("Phoebe",Coeus.x+cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height);
+let Kronos = new God("Kronos",(centers.large-cardWidth/2)-(betweenCards/2),level5,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.earth);
+let Rhea = new God("Rhea",(centers.large+cardWidth/2)+(betweenCards/2),level5,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.earth);
+let Crius = new God("Crius",Kronos.x-cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky);
+let Theia = new God("Theia",Crius.x-cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky);
+let Hyperion = new God("Hyperion",Theia.x-cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky);
+let Tethys = new God("Tethys",Hyperion.x-cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.water);
+let Oceanus = new God("Oceanus",Tethys.x-cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.water);
+let Themis = new God("Themis",Rhea.x+cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let Iapetus = new God("Iapetus",Themis.x+cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let Mnemosyne = new God("Mnemosyne",Iapetus.x+cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let Coeus = new God("Coeus",Mnemosyne.x+cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky);
+let Phoebe = new God("Phoebe",Coeus.x+cardSpace,level5,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky);
 
 let level6 = Kronos.y+cardAbove;
 let level7 = Kronos.y+2*(cardAbove);
@@ -131,41 +145,41 @@ let level7 = Kronos.y+2*(cardAbove);
 //level 6 gods
 
 //level 7 gods
-let Zeus = new God("Zeus",(centers.large-cardWidth/2)-(betweenCards/2),level7,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Hera = new God("Hera",(centers.large+cardWidth/2)+(betweenCards/2),level7,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Hades = new God("Hades",Hera.x+cardSpace,level7,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Hestia = new God("Hestia",Hades.x+cardSpace,level7,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Demeter = new God("Demeter",Zeus.x-cardSpace,level7,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Poseidon = new God("Poseidon",Demeter.x-cardSpace,level7,"img/corgi.jpeg",largeCard.width,largeCard.height);
+let Zeus = new God("Zeus",(centers.large-cardWidth/2)-(betweenCards/2),level7,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.sky);
+let Hera = new God("Hera",(centers.large+cardWidth/2)+(betweenCards/2),level7,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.sky);
+let Hades = new God("Hades",Hera.x+cardSpace,level7,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.underworld);
+let Hestia = new God("Hestia",Hades.x+cardSpace,level7,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.personification);
+let Demeter = new God("Demeter",Zeus.x-cardSpace,level7,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.earth);
+let Poseidon = new God("Poseidon",Demeter.x-cardSpace,level7,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.water);
 
 let level8 = Zeus.y+cardAbove;
 
 //level 8 gods
-let Ares = new God("Ares",(centers.large-cardWidth/2)-(betweenCards/2),level8,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Aphrodite = new God("Aphrodite",(centers.large+cardWidth/2)+(betweenCards/2),level8,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Hephaestus = new God("Hephaestus",Ares.x-cardSpace,level8,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Hebe = new God("Hebe",Hephaestus.x-cardSpace,level8,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Athena = new God("Athena",Hebe.x-cardSpace,level8,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Triton = new God("Triton",Athena.x-cardSpace,level8,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Adonis = new God("Adonis",Aphrodite.x+cardSpace,level8,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Hermes = new God("Hermes",Adonis.x+cardSpace,level8,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Apollo = new God("Apollo",Hermes.x+cardSpace,level8,"img/corgi.jpeg",largeCard.width,largeCard.height);
-let Artemis = new God("Artemis",Apollo.x+cardSpace,level8,"img/corgi.jpeg",largeCard.width,largeCard.height);
+let Ares = new God("Ares",(centers.large-cardWidth/2)-(betweenCards/2),level8,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.personification);
+let Aphrodite = new God("Aphrodite",(centers.large+cardWidth/2)+(betweenCards/2),level8,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.personification);
+let Hephaestus = new God("Hephaestus",Ares.x-cardSpace,level8,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.personification);
+let Hebe = new God("Hebe",Hephaestus.x-cardSpace,level8,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let Athena = new God("Athena",Hebe.x-cardSpace,level8,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.personification);
+let Triton = new God("Triton",Athena.x-cardSpace,level8,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.water);
+let Adonis = new God("Adonis",Aphrodite.x+cardSpace,level8,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.mortal);
+let Hermes = new God("Hermes",Adonis.x+cardSpace,level8,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.sky);
+let Apollo = new God("Apollo",Hermes.x+cardSpace,level8,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.sky);
+let Artemis = new God("Artemis",Apollo.x+cardSpace,level8,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.earth);
 
 let level9 = Aphrodite.y+cardAbove;
 
 //level 9
-let Ganymede = new God("Ganymede",Athena.x,level9,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Persephone = new God("Persephone",Ganymede.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Charities = new God("The Charitites",Persephone.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Dike = new God("Dike",Charities.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Eunomia = new God("Eunomia",Dike.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Eirene = new God("Eirene",Eunomia.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Eros = new God("Eros",Eirene.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Psyche = new God("Psyche",Eros.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Hermaphrodites = new God("Hermaphrodites",Psyche.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let muses = new God("9 Muses",Hermaphrodites.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height);
-let Hecate = new God("Hecate",muses.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height);
+let Ganymede = new God("Ganymede",Athena.x,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.mortal);
+let Persephone = new God("Persephone",Ganymede.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.underworld);
+let Charities = new God("The Charitites",Persephone.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let Dike = new God("Dike",Charities.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let Eunomia = new God("Eunomia",Dike.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let Eirene = new God("Eirene",Eunomia.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let Eros = new God("Eros",Eirene.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let Psyche = new God("Psyche",Eros.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.mortal);
+let Hermaphrodites = new God("Hermaphrodites",Psyche.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let muses = new God("9 Muses",Hermaphrodites.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
+let Hecate = new God("Hecate",muses.x+cardSpaceSmall,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification);
 
 //push them into an array
 //level 1 god
@@ -286,8 +300,8 @@ function createModal(d,i){
 //hightlight children for cards
 function highlight(parent,event){
     for(let child of parent.children){
-        var color = (event === 'mouseover') ? 'red' : 'black';
-        document.getElementById(child).style.stroke= color ;
+        var color = (event === 'mouseover') ? 'red' : '';
+        document.getElementById(child).style.stroke = color ;
     }
 }
 
