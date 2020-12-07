@@ -24,6 +24,8 @@ class God{
     tree.append("rect") //add card
         .attr("x",this.x)
         .attr("y",this.y)
+        .attr("rx", 6)
+        .attr("ry", 6)
         .attr("godName",this.greekName)
         .attr("children",this.children)
         .attr("width",this.width)
@@ -37,7 +39,7 @@ class God{
         .attr("xlink:href",this.image)
         .attr("x", this.x)
         .attr("y", this.y+20)
-        .attr("height", 40);
+        .attr("height", 20);
 //        .attr("width", 20);
     }
     
