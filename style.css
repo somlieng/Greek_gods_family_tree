@@ -38,10 +38,11 @@ button{
 text{
     dominant-baseline: middle;
     text-anchor: middle;
+    fill:#FEFFF6;
 }
 
-.text-underworld, .domain-underworld{
-    fill:#FEFFF6;
+.text-monster,.domain-monster{
+    fill:#474747;
 }
 
 .domain{

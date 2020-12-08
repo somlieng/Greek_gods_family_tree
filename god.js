@@ -32,19 +32,19 @@ class God{
         .attr("description",this.description)
         .attr("width",this.width)
         .attr("height",this.height)
-        .attr("cursor", "grab")
+//        .attr("cursor", "default")
     if(this.cardType === "small"){
         tree.append("text") //text
             .text(this.greekName)
             .attr("class","text-"+this.godType)
             .attr("x",this.x+(this.width/2))
-            .attr("y",this.y+(this.height/2));
+            .attr("y",this.y+(this.height/2)-5);
          tree.append("text") //text
             .text(this.domain)
             .attr("class","domain-"+this.godType+" "+"domain")
             .attr("id","domain-"+this.greekName)
             .attr("x",this.x+(this.width/2))
-            .attr("y",this.y+(this.height/2)+20);
+            .attr("y",this.y+(this.height/2)+10);
     }else{
         tree.append("svg:image")
             .attr("xlink:href",this.image)
