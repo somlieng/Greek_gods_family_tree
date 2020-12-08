@@ -5,7 +5,34 @@
   --underworld: #251B38;
   --personification: #FD7037;
   --monster: #FEB131;
-  --mortal: #765699;
+  --mortal: #E44A20;
+}
+
+html{
+    background-color: #FEFFF6;
+}
+
+button{
+    position:fixed;
+	background-color:#0C9;
+    stroke: none;
+	color:#FFF;
+	border-radius:20px;
+	text-align:center;
+}
+
+#controls{
+    width:80px;
+	height:40px;
+	top:20px;
+	left:20px;
+}
+
+#redraw{
+    width:80px;
+	height:40px;
+	top:70px;
+	left:20px;
 }
 
 text{
@@ -13,8 +40,12 @@ text{
     text-anchor: middle;
 }
 
-.text-underworld{
-    fill:white;
+.text-underworld, .domain-underworld{
+    fill:#FEFFF6;
+}
+
+.domain{
+    font-size: 12px;
 }
 
 rect{

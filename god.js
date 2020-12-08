@@ -1,5 +1,5 @@
 class God{
-    constructor(gName,x,y,image,width,height,cardType,godType,children,spouse){
+    constructor(gName,x,y,image,width,height,cardType,godType,domain,description,children,spouse){
         this.greekName = gName;
         this.x = x;
         this.y = y;
@@ -8,13 +8,10 @@ class God{
         this.height = height;
         this.cardType = cardType;
         this.godType = godType;
+        this.domain = domain;
+        this.description = description;
         this.children = [];
         this.spouse = [];
-//        this.romanName = rName;
-//        this.godType = type;
-//        this.godTitle = title;
-//        this.description = desc;
-//        this.image = picture;
     }
     
     clickCard(){
@@ -23,7 +20,6 @@ class God{
     
     //God cards
     view(){ 
-    
     var picHeight = this.width-20;
     tree.append("rect") //add card
         .attr("x",this.x)
@@ -32,7 +28,8 @@ class God{
         .attr("ry", 6)
         .attr("godName",this.greekName)
         .attr("class",this.godType)
-        .attr("children",this.children)
+        .attr("domain",this.domain)
+        .attr("description",this.description)
         .attr("width",this.width)
         .attr("height",this.height)
         .attr("cursor", "grab")
@@ -42,6 +39,12 @@ class God{
             .attr("class","text-"+this.godType)
             .attr("x",this.x+(this.width/2))
             .attr("y",this.y+(this.height/2));
+         tree.append("text") //text
+            .text(this.domain)
+            .attr("class","domain-"+this.godType+" "+"domain")
+            .attr("id","domain-"+this.greekName)
+            .attr("x",this.x+(this.width/2))
+            .attr("y",this.y+(this.height/2)+20);
     }else{
         tree.append("svg:image")
             .attr("xlink:href",this.image)
@@ -53,16 +56,13 @@ class God{
             .attr("class","text-"+this.godType)
             .attr("x",this.x+(this.width/2))
             .attr("y",this.y+picHeight+30);
+        tree.append("text") //text
+            .text(this.domain)
+            .attr("class","domain-"+this.godType+" "+"domain")
+            .attr("id","domain-"+this.greekName)
+            .attr("x",this.x+(this.width/2))
+            .attr("y",this.y+picHeight+50);
         }
     }
     
-    hover(){
-    
-    }
 }
-
-//static get variable () {
-//
-//return value;
-//
-//}
