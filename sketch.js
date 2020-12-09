@@ -482,6 +482,9 @@ function pathMaker(pathType,source,target,name,union,id,marginX,down){
     if(pathType === singleParent){
         source.children.push(id);
     }
+    if(pathType === singleParent2){
+        source.children.push(id);
+    }
     if(pathType === spousePath){
         source.spouse.push(id);
         target.spouse.push(id);
@@ -509,6 +512,13 @@ function singleParent(source,target,marginX,down){
             "v"+down+
             "H"+(target.x+target.width/2)+
             "V"+target.y
+}
+
+function singleParent2(source,target,marginX,down){
+    return  "M"+(source.x+marginX+source.width)+","+(source.y+source.height/2)+
+            "h"+down+
+            "V"+(target.y+target.height/2)+
+            "H"+target.x
 }
 
 //Spouse path function
@@ -557,6 +567,9 @@ function makeConnections(){
     pathMaker(singleParent,Gaia,Ourea,lineType.earth,"child","GaiaOurea",0,25);
     pathMaker(singleParent,Gaia,Pontus,lineType.water,"child","GaiaPontus",0,25);
     pathMaker(singleParent,Gaia,Uranus,lineType.sky,"child","GaiaUra",0,25);
+    
+    pathMaker(singleParent2,Nyx,Moros,lineType.underworld,"child","NyxMoros",0,120);
+    pathMaker(singleParent2,Nyx,Ker,lineType.underworld,"child","NyxKer",0,120);
 
     //make spouse connections
     pathMaker(spousePath,Gaia,Tartarus,lineType.personification,"spouse","GaiaTar",-20,10);
