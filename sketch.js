@@ -32,8 +32,8 @@ let largeCard = {width: 120,
                  type:"large"};
 
 let smallCard = {width: 90,
-               height: 40,
-                type:"small"};
+                 height: 40,
+                 type:"small"};
 
 let cardWidth = 40;
 let cardHeight = 50;
@@ -51,7 +51,7 @@ let downLink = 10;
 let cardAbove = largeCard.height+cardTopSpace;
 
 let cardSpace = largeCard.width+betweenCards;
-let cardSpaceSmall = smallCardWidth+smallCardBetween;
+let cardSpaceSmall = smallCard.width+smallCardBetween;
 
 let centers ={regular:width/2-regularCard.width/2,
               large:width/2-largeCard.width/2,
@@ -128,8 +128,32 @@ let domain = {  Chaos:"The Void",
                 muses:"",
                 Hecate:"",
                 Typhon:"Father of all monsters",
-                Echidna:"Mother of all monsters"
-                
+                Echidna:"Mother of all monsters",
+                Orthrus:"",
+                Cerebus:"",
+                Colchian:"",
+                Chimera:"",
+                Hydra:"",
+                Sphinx:"",
+                Aether:"Day",
+                Hemera:"Light",
+                Thalassa:"Sea Goddess",
+                Charon:"Ferryman to the underworld",
+                Moros:"Doom",
+                Ker:"Violent death",
+                Thanatos:"Death",
+                Hypnos:"Sleep",
+                Oneriroi:"Dream Spirits",
+                Momus:"Blame",
+                Geras:"Old Age",
+                Oizys:"Distress",
+                Nemesis:"Retribution",
+                Philotes:"Affection",
+                Apate:"Deceit",
+                Eris:"Strife",
+                Moirai:"The 3 Fates",
+                Keres:"Death Spirits",
+                Hesperides:"Nymphs"
              };
 
 let description = {  Chaos:"The Void",
@@ -181,7 +205,32 @@ let description = {  Chaos:"The Void",
                 muses:"",
                 Hecate:"",
                 Typhon:"",
-                Echidna:""
+                Echidna:"",
+                Orthrus:"",
+                Cerebus:"",
+                Colchian:"",
+                Chimera:"",
+                Hydra:"",
+                Sphinx:"",
+                Aether:"Day",
+                Hemera:"Light",
+                Thalassa:"Sea Goddess",
+                Charon:"Ferryman to the underworld",
+                Moros:"Doom",
+                Ker:"Violent death",
+                Thanatos:"Death",
+                Hypnos:"Sleep",
+                Oneriroi:"Dream Spirits",
+                Momus:"Blame",
+                Geras:"Old Age",
+                Oizys:"Distress",
+                Nemesis:"Retribution",
+                Philotes:"Affection",
+                Apate:"Deceit",
+                Eris:"Strife",
+                Moirai:"The 3 Fates",
+                Keres:"Death Spirits",
+                Hesperides:"Nymphs"
              };
 
 //************make a shit ton of gods************//
@@ -204,14 +253,44 @@ let level3 = Gaia.y+cardAbove;
 let Uranus = new God("Uranus",centers.large,level3,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.sky,domain.Uranus,description.Uranus);
 let Ourea = new God("Ourea",centers.regular-cardSpace,level3,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.earth,domain.Ourea,description.Ourea);
 let Pontus = new God("Pontus",centers.regular+cardSpace,level3,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.water,domain.Pontus,description.Pontus);
+let Aether = new God("Aether",Erebus.x+smallCardBetween,level3,null,smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Aether,description.Aether);
+let Hemera = new God("Hemera",Aether.x+cardSpace,level3,null,smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Hemera,description.Hemera);
+let Thalassa = new God("Thalassa",(Aether.x+Hemera.x)/2,Aether.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Thalassa,description.Thalassa);
+let Charon = new God("Charon",Hemera.x+cardSpace,level3,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.underworld,domain.Charon,description.Charon);
+let Moros = new God("Moros",Charon.x+cardSpace*2,level3,null,smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Moros,description.Moros);
+let Ker = new God("Ker",Charon.x+cardSpace*2,Moros.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Ker,description.Ker);
+let Thanatos = new God("Thanatos",Charon.x+cardSpace*2,Ker.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Thanatos,description.Thanatos);
+let Hypnos = new God("Hypnos",Charon.x+cardSpace*2,Thanatos.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Hypnos,description.Hypnos);
+let Oneriroi = new God("Oneriroi",Charon.x+cardSpace*2,Hypnos.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Oneriroi,description.Oneriroi);
+let Momus = new God("Momus",Moros.x+cardSpace,level3,null,smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Momus,description.Momus);
+let Geras = new God("Geras",Moros.x+cardSpace,Moros.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Geras,description.Geras);
+let Oizys = new God("Oizys",Moros.x+cardSpace,Ker.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Oizys,description.Oizys);
+let Nemesis = new God("Nemesis",Moros.x+cardSpace,Thanatos.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Nemesis,description.Nemesis);
+let Philotes = new God("Philotes",Moros.x+cardSpace,Hypnos.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Philotes,description.Philotes);
+let Apate = new God("Apate",Momus.x+cardSpace,level3,null,smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Apate,description.Apate);
+let Eris = new God("Eris",Momus.x+cardSpace,Moros.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Eris,description.Eris);
+let Moirai = new God("The Moirai",Momus.x+cardSpace,Ker.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Moirai,description.Moirai);
+let Keres = new God("The Keres",Momus.x+cardSpace,Thanatos.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Keres,description.Keres);
+let Hesperides = new God("The Hesperides",Momus.x+cardSpace,Hypnos.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.earth,domain.Hesperides,description.Hesperides);
 
-let level4 = Uranus.y+cardAbove;
-let level5 = Uranus.y+2*(cardAbove);
+// Apate:"Deceit",
+//                Eris:"Strife",
+//                Moirai:"The 3 Fates",
+//                Keres:"Death Spirits",
+//                Hesperides:"Nymphs"
+
+let level4 = Uranus.y+2*(cardAbove);
+let level5 = Uranus.y+3*(cardAbove);
 
 //level 4
-let Typhon = new God("Typhon",ErosElder.x-cardSpace,level3+smallCard.height,null,smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Typhon,description.Typhon);
-let Echidna = new God("Echidna",ErosElder.x+smallCard.width,level3+smallCard.height,null,smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Echidna,description.Echidna);
-
+let Typhon = new God("Typhon",ErosElder.x-cardSpace*2,level3+smallCard.height,null,smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Typhon,description.Typhon);
+let Echidna = new God("Echidna",Typhon.x+cardSpace,level3+smallCard.height,null,smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Echidna,description.Echidna);
+let Colchian = new God("Colchian Dragon",(Typhon.x+Echidna.x)/2-cardSpace/2,level3+regularCard.height,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Colchian,description.Colchian);
+let Chimera = new God("Chimera",(Typhon.x+Echidna.x)/2+cardSpace/2,level3+regularCard.height,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Chimera,description.Chimera);
+let Hydra = new God("Hydra",Chimera.x+cardSpace,level3+regularCard.height,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Hydra,description.Hydra);
+let Sphinx = new God("Sphinx",Hydra.x+cardSpace,level3+regularCard.height,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Sphinx,description.Sphinx);
+let Cerebus = new God("Sphinx",Colchian.x-cardSpace,level3+regularCard.height,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.underworld,domain.Cerebus,description.Cerebus);
+let Orthrus = new God("Orthrus",Cerebus.x-cardSpace,level3+regularCard.height,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Orthrus,description.Orthrus);
 
 //level 5 gods
 let Kronos = new God("Kronos",(centers.large-cardWidth/2)-(betweenCards/2),level5,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.earth,domain.Kronos,description.Kronos);
@@ -282,9 +361,34 @@ familyTree.push(Nyx);
 familyTree.push(Ourea);
 familyTree.push(Uranus);
 familyTree.push(Pontus);
+familyTree.push(Aether);
+familyTree.push(Hemera);
+familyTree.push(Thalassa);
+familyTree.push(Charon);
+familyTree.push(Moros);
+familyTree.push(Ker);
+familyTree.push(Thanatos);
+familyTree.push(Hypnos);
+familyTree.push(Oneriroi);
+familyTree.push(Momus);
+familyTree.push(Geras);
+familyTree.push(Oizys);
+familyTree.push(Nemesis);
+familyTree.push(Philotes);
+familyTree.push(Apate);
+familyTree.push(Eris);
+familyTree.push(Moirai);
+familyTree.push(Keres);
+familyTree.push(Hesperides);
 //level 4
 familyTree.push(Typhon);
 familyTree.push(Echidna);
+familyTree.push(Colchian);
+familyTree.push(Chimera);
+familyTree.push(Hydra);
+familyTree.push(Sphinx);
+familyTree.push(Cerebus);
+familyTree.push(Orthrus);
 //level 5
 familyTree.push(Kronos);
 familyTree.push(Rhea);
@@ -469,7 +573,7 @@ function makeConnections(){
     let titans = [Rhea,Kronos,Crius,Theia,Hyperion,Tethys,Oceanus,Themis,Iapetus,Mnemosyne,Coeus,Phoebe];
 
     for(let god of titans){
-        familyMaker(Gaia,Uranus,god,0,20,200,lineType.main,"GaiaUranus"+god.greekName);
+        familyMaker(Gaia,Uranus,god,0,20,400,lineType.main,"GaiaUranus"+god.greekName);
     }
 
     let olympians = [Zeus,Hera,Demeter,Poseidon,Hades,Hestia]
