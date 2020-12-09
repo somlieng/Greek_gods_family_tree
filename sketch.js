@@ -342,13 +342,9 @@ function zoomed({transform}) {
 //    console.log("dragging");
 //}
 
-//window resize
-//addEventListener('windowResize', callback) 
-//when the person is finished the resize
-
 function createTree(treeWidth,treeHeight){
     tree = d3.select("#familyTree").append("svg")
-             .attr("viewBox", [0, 0, treeWidth, treeHeight])
+             .attr("viewBox", [0, 0, treeWidth, treeHeight*1.5])
              .attr("preserveAspectRatio", "xMidYMid meet")
 //             .attr("width",width)
 //             .attr("height",height)
@@ -523,6 +519,7 @@ function highlight(parent,event){
     for(let child of parent.children){
         var color = (event === 'mouseover') ? 'red' : '';
         document.getElementById(child).style.stroke = color ;
+//        document.getElementById(child).style.stroke.width = 4px ;
     }
 }
 
@@ -551,10 +548,15 @@ function revert(d,i){
 //************ Card interactions ************//
 
 function openControls(){
-    console.log("open controls");
     var modal = new controlsModal();
     d3.select('#modalContainer').html(modal.html);
 document.getElementById('controlModal').style.display='block';
+}
+
+function openLegend(){
+    var modal = new legendModal();
+    d3.select('#modalContainer').html(modal.html);
+document.getElementById('legend').style.display='block';
 }
 
 //make Modal object
@@ -588,16 +590,60 @@ function controlsModal() {
         <div class="w3-modal-content">
             <header class="w3-container"> 
                 <span onclick="document.getElementById('controlModal').style.display='none'"class="w3-button w3-display-topright">&times;</span>
-                <h2>Family Tree Controls</h2>
+                <h2>Greek Mythology Family Tree</h2>
             </header>
           <div class="w3-container">
-            <p>Welcome to the messy and incestous world of Greek mythology! Here are the controls you might use to fully explore this weird family</p>
+            <h4>Welcome to the messy and incestous world of Greek mythology! Here are the controls you might use to fully explore this weird family</h4>
             <ul>
               <li>Zoom: Use either your trackpad or mouse scroll to zoom in and out of the family tree</li>
-              <li>Hover: Hover over the cards who are the children of the deity that you are hovering over. All of that deity's children will highlighted.</li>
+              <li>Hover: Hover over a deity with children. All of that deity's children will highlighted.</li>
               <li>Click: Click on the card to read more information about that deity</li>
               <li>Redraw: While the tree is resposive, there is a quirk where the preserved aspect ratio will cut off the tree. Click redraw to redraw the tree to fit your screen better.</li>
             </ul>
+            <p>If you ever need a quick refresh of the controls, click the controls button on the top left.</p>
+          </div>
+        </div>
+    </div>`;
+}
+
+//make legend Modal object
+function legendModal() {
+  this.html = 
+    `<div id="legend" class="w3-modal">
+        <div class="w3-modal-content">
+            <header class="w3-container"> 
+                <span onclick="document.getElementById('legend').style.display='none'"class="w3-button w3-display-topright">&times;</span>
+                <h2>Legend</h2>
+            </header>
+          <div class="w3-container legendContainer">
+            <div>
+                <svg height="160px" width="500px">
+                    <rect x="0" y="0" width="100" height="160" class="earth" rx="6" ry="6"></rect>
+                    <image href="img/corgi.jpeg" x="10" y="10" height="80"></image>
+                    <text class="text-earth" x="50" y="110"> Name</text>
+                    <text class="domain-earth domain" x="50" y="130"> Gender & </text>
+                    <text class="domain-earth domain" x="50" y="145"> Domain </text>
+                    <rect x="120" y="0" width="90" height="40" class="earth" rx="6" ry="6"></rect>
+                    <text class="text-earth" x="165" y="20"> Earth Gods </text>
+                    <rect x="120" y="60" width="90" height="40" class="sky" rx="6" ry="6"></rect>
+                    <text class="text-sky" x="165" y="80"> Sky Gods </text>
+                    <rect x="120" y="120" width="90" height="40" class="water" rx="6" ry="6"></rect>
+                    <text class="text-water" x="165" y="140"> Sea Gods </text>
+                    <rect x="230" y="0" width="110" height="40" class="personification" rx="6" ry="6"></rect>
+                    <text class="domain-personification domain" x="285" y="20"> Personifications </text>
+                    <rect x="230" y="60" width="110" height="40" class="underworld" rx="6" ry="6"></rect>
+                    <text class="domain-underworld domain" x="285" y="80"> Underworld Gods </text>
+                    <rect x="230" y="120" width="110" height="40" class="monster" rx="6" ry="6"></rect>
+                    <text class="text-monster" x="285" y="140"> Monsters </text>
+                    <rect x="360" y="0" width="110" height="40" class="mortal" rx="6" ry="6"></rect>
+                    <text class="domain-mortal domain" x="415" y="15"> Mortals & </text>
+                    <text class="domain-mortal domain" x="415" y="27"> Demigods </text>
+                    <text class="domain-monster domain" x="415" y="70"> Spouse relationship</text>
+                    <line x1="360" y1="90" x2="470" y2="90" class="line-main spouse"/>
+                    <text class="domain-monster domain" x="415" y="130"> Child relationship</text>
+                    <line x1="360" y1="150" x2="470" y2="150" class="line-main child"/>
+                </svg>
+            </div>
           </div>
         </div>
     </div>`;

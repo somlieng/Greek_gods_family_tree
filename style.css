@@ -19,19 +19,24 @@ button{
 	color:#FFF;
 	border-radius:20px;
 	text-align:center;
+    width:80px;
+	height:40px;
 }
 
 #controls{
-    width:80px;
-	height:40px;
 	top:20px;
 	left:20px;
 }
 
+/*
 #redraw{
-    width:80px;
-	height:40px;
 	top:70px;
+	left:20px;
+}
+*/
+
+#legends{
+    top:70px;
 	left:20px;
 }
 
@@ -52,9 +57,9 @@ text{
 rect{
     fill:white;
     stroke: none;
-    padding: 20px;
 }
 
+/*
 .svg-container {
     display: inline-block;
     position: relative;
@@ -63,6 +68,7 @@ rect{
     vertical-align: top;
     overflow: hidden;
 }
+*/
 
 .svg-content {
     display: inline-block;
@@ -142,4 +148,8 @@ rect{
     fill:none;
     stroke:black;
     stroke-width: 2px;
+}
+
+.legendContainer{
+    display: flex;
 }
