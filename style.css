@@ -53,7 +53,6 @@ text{
 }
 
 rect{
-    fill:white;
     stroke: none;
 }
 
@@ -150,4 +149,9 @@ rect{
 
 .legendContainer{
     display: flex;
+}
+
+
+.hitbox{
+    fill:transparent;
 }

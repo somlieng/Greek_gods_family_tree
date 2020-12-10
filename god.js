@@ -1,5 +1,5 @@
 class God{
-    constructor(gName,x,y,image,width,height,cardType,godType,domain,description,children,spouse){
+    constructor(gName,x,y,image,width,height,cardType,godType,domain,description,children,spouse,childRect){
         this.greekName = gName;
         this.x = x;
         this.y = y;
@@ -12,6 +12,8 @@ class God{
         this.description = description;
         this.children = [];
         this.spouse = [];
+        this.childRect = [];
+        this.rectID = "rect-"+gName;
     }
     
     clickCard(){
@@ -26,13 +28,10 @@ class God{
         .attr("y",this.y)
         .attr("rx", 6)
         .attr("ry", 6)
-        .attr("godName",this.greekName)
+        .attr("id",this.rectID)
         .attr("class",this.godType)
-        .attr("domain",this.domain)
-        .attr("description",this.description)
         .attr("width",this.width)
         .attr("height",this.height)
-//        .attr("cursor", "default")
     if(this.cardType === "small"){
         tree.append("text") //text
             .text(this.greekName)
@@ -45,23 +44,43 @@ class God{
             .attr("id","domain-"+this.greekName)
             .attr("x",this.x+(this.width/2))
             .attr("y",this.y+(this.height/2)+10);
+        tree.append("rect")//hitbox
+            .attr("x",this.x-5)
+            .attr("y",this.y-5)
+            .attr("godName",this.greekName)
+            .attr("class","hitbox")
+//            .attr("class",this.godType)
+            .attr("domain",this.domain)
+            .attr("description",this.description)
+            .attr("width",this.width+5)
+            .attr("height",this.height+5)
     }else{
-        tree.append("svg:image")
+        tree.append("svg:image")//image
             .attr("xlink:href",this.image)
             .attr("x", this.x+10)
             .attr("y", this.y+10)
             .attr("height",picHeight);
-        tree.append("text") //text
+        tree.append("text") //name text
             .text(this.greekName)
             .attr("class","text-"+this.godType)
             .attr("x",this.x+(this.width/2))
             .attr("y",this.y+picHeight+30);
-        tree.append("text") //text
+        tree.append("text") //domain text
             .text(this.domain)
             .attr("class","domain-"+this.godType+" "+"domain")
             .attr("id","domain-"+this.greekName)
             .attr("x",this.x+(this.width/2))
             .attr("y",this.y+picHeight+50);
+        tree.append("rect")//hitbox
+            .attr("x",this.x-5)
+            .attr("y",this.y-5)
+            .attr("godName",this.greekName)
+            .attr("class","hitbox")
+//            .attr("class",this.godType)
+            .attr("domain",this.domain)
+            .attr("description",this.description)
+            .attr("width",this.width+10)
+            .attr("height",this.height+10)
         }
     }
     
