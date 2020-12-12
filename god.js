@@ -1,5 +1,5 @@
 class God{
-    constructor(gName,x,y,image,width,height,cardType,godType,domain,description,children,spouse,childRect){
+    constructor(gName,x,y,image,width,height,cardType,godType,domain,description){
         this.greekName = gName;
         this.x = x;
         this.y = y;
@@ -10,9 +10,9 @@ class God{
         this.godType = godType;
         this.domain = domain;
         this.description = description;
-        this.children = [];
+        this.children = new Set();
         this.spouse = [];
-        this.childRect = [];
+        this.childRect = new Set();
         this.rectID = "rect-"+gName;
     }
     
