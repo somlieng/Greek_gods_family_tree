@@ -14,6 +14,7 @@
 //Global Variables
 
 let tree;
+let tooltip;
 
 let margins = {top:50,
                bottom: 50,
@@ -679,15 +680,15 @@ function createTree(treeWidth,treeHeight){
     tree = d3.select("#familyTree").append("svg")
              .attr("viewBox", [0, 0, treeWidth, treeHeight*1.5])
              .attr("preserveAspectRatio", "xMidYMid meet")
-//             .attr("width",width)
-//             .attr("height",height)
              .attr("cursor", "grab")
-//             .on('mousedown',dragging)
              .call(d3.zoom() //zoom interaction
                 .extent([[0, 0], [width, height]])
                 .scaleExtent([0, 9])
                 .on("zoom", zoomed))
              .append("g");
+//    tooltip = d3.select("body").append("div")
+//                .attr("id", "tooltip")
+//                .style("opacity", 0);
 }
 
 function redraw(){
@@ -728,9 +729,9 @@ function pathMaker(pathType,source,target,name,union,id,marginX,down){
    return line;
 }
 
-function incestMaker(pathType,source,target,name,union,id,marginX,down1,down2){
+function incestSpouse(pathType,source,target,name,id,marginX,down1,down2){
   let line = tree.append("path")
-                  .attr("class",name+" "+union)
+                  .attr("class",name+" spouse")
                   .attr("id",id)
                   .attr("d",spouseIncest(source,target,marginX,down1,down2));
         linkIDs.push(id);
@@ -741,7 +742,7 @@ function incestMaker(pathType,source,target,name,union,id,marginX,down1,down2){
 
 function familyMaker(wife,husband,child,marginX,down1,down2,name,id){
   let line = tree.append("path")
-                  .attr("class",name)
+                  .attr("class",name+" child")
                   .attr("id",id)
                   .attr("d",parentsChild(wife,husband,child,marginX,down1,down2));
     linkIDs.push(id);
@@ -805,7 +806,7 @@ makeCards();
 function makeConnections(){
     
     //****** make single Parent ******//
-    let primordials = [ErosElder,Tartarus,Gaia,Erebus,Nyx];
+    var primordials = [ErosElder,Tartarus,Gaia,Erebus,Nyx];
 
     for(let god of primordials){
         pathMaker(singleParent,Chaos,god,lineType.main,"child","Chaos"+god.greekName,0,downLink);
@@ -820,16 +821,17 @@ function makeConnections(){
     //****** make spouse connections ******//
     pathMaker(spousePath,Gaia,Tartarus,lineType.personification,"spouse","GaiaTar",-50,10);
     pathMaker(spousePath,Nyx,Erebus,lineType.personification,"spouse","NyxEre",0,10);
-    incestMaker(spouseIncest,Gaia,Uranus,lineType.main,"spouse","GaiaUra2",-10,40,20);
-    //pathMaker(spousePath,Oceanus,Tethys,lineType.main,"spouse","OceTeth");
-    //pathMaker(spousePath,Hyperion,Theia,lineType.main,"spouse","HypTheia");
-    //pathMaker(spousePath,Coeus,Phoebe,lineType.main,"spouse","CoeusPhoebe");
-    pathMaker(spousePath,Kronos,Rhea,lineType.main,"spouse","KroRhea",0,10);
+    pathMaker(spousePath,Oceanus,Tethys,lineType.main,"spouse","OceTeth",0,20);
+    pathMaker(spousePath,Hyperion,Theia,lineType.main,"spouse","HypTheia",0,20);
+    pathMaker(spousePath,Coeus,Phoebe,lineType.main,"spouse","CoeusPhoebe",0,20);
+    pathMaker(spousePath,Kronos,Rhea,lineType.main,"spouse","KroRhea",0,20);
+    incestSpouse(spouseIncest,Gaia,Uranus,lineType.main,"GaiaUra2",-10,40,20);
 
     //make child connections
-    //familyMaker(Gaia,Tartarus,Typhon,lineType.monster,"GaiaTartarusTyphon");
+    
+    familyMaker(Gaia,Tartarus,Typhon,(Gaia.x-Tartarus.x)/2,30,100,lineType.monster,"GaiaTartarusTyphon");
 
-    let titans = [Rhea,Kronos,Crius,Theia,Hyperion,Tethys,Oceanus,Themis,Iapetus,Mnemosyne,Coeus,Phoebe];
+    var titans = [Rhea,Kronos,Crius,Theia,Hyperion,Tethys,Oceanus,Themis,Iapetus,Mnemosyne,Coeus,Phoebe];
 
     for(let god of titans){
         familyMaker(Gaia,Uranus,god,0,20,400,lineType.main,"GaiaUranus"+god.greekName);
@@ -892,7 +894,9 @@ function highlight(parent,event){
         if(!parent.children.has(link)){
             document.getElementById(link).style.stroke = color;
         }
-        document.getElementById(link).style.strokeWidth = stroke;
+        if(parent.children.has(link)){
+            document.getElementById(link).style.strokeWidth = stroke;
+        }
     }
     
     for(let card of cardIDs){
@@ -905,7 +909,21 @@ function highlight(parent,event){
         }
     }
     
+    var toggle = (event === 'mouseover') ? '1' : '0';
     
+//    console.log(parent.greekName+" has "+parent.childRect.size+" children.")
+    
+    var html = parent.greekName+" has "+parent.childRect.size+" children."; 
+    
+    d3.select('.tooltip').transition()
+                         .duration('100')
+                         .style("opacity", toggle);
+    d3.select('.tooltip').html(html)
+                         .style("position","absolute")
+                         .style("text-align","center")
+                         .style("background","#FFFFFF")
+                         .style("left", (event.pageX + 10) + "px")
+                         .style("top", (event.pageY - 15) + "px");
 }
 
 function highlightChildren(d,i){
@@ -915,8 +933,7 @@ function highlightChildren(d,i){
     highlight(godMap[name],'mouseover');
     d3.select(this)
       .transition()
-//        .attr("width",cardWidth+20)
-//        .attr("height",cardHeight+20)
+      .duration('500');
 }
 
 function revert(d,i){
@@ -926,8 +943,7 @@ function revert(d,i){
         highlight(godMap[name],'mouseout');
         d3.select(this)
         .transition()
-//        .attr("width",cardWidth)
-//        .attr("height",cardHeight)
+        .duration('500');
 }
 
 //************ Card interactions ************//
