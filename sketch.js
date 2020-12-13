@@ -14,7 +14,6 @@
 //Global Variables
 
 let tree;
-let tooltip;
 
 let margins = {top:50,
                bottom: 50,
@@ -42,8 +41,6 @@ let cardTopSpace = 150;
 
 let betweenCards = 20;
 let smallCardBetween = 15;
-
-let downLink = 10;
 
 let cardAbove = largeCard.height+cardTopSpace;
 
@@ -363,8 +360,8 @@ let level3 = Gaia.y+cardAbove;
 
 //level 3 gods
 let Uranus = new God("Uranus",centers.large,level3,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.sky,domain.Uranus,description.Uranus);
-let Ourea = new God("Ourea",centers.regular-cardSpace,level3,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.earth,domain.Ourea,description.Ourea);
-let Pontus = new God("Pontus",centers.regular+cardSpace,level3,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.water,domain.Pontus,description.Pontus);
+let Ourea = new God("Ourea",centers.regular-cardSpace-40,level3,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.earth,domain.Ourea,description.Ourea);
+let Pontus = new God("Pontus",centers.regular+cardSpace+20,level3,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.water,domain.Pontus,description.Pontus);
 let Aether = new God("Aether",Erebus.x+smallCardBetween,level3,null,smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Aether,description.Aether);
 let Hemera = new God("Hemera",Aether.x+cardSpace,level3,null,smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Hemera,description.Hemera);
 let Thalassa = new God("Thalassa",(Aether.x+Hemera.x)/2,Aether.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Thalassa,description.Thalassa);
@@ -397,11 +394,11 @@ let Hydra = new God("Hydra",Chimera.x+cardSpace,level3+regularCard.height,"img/c
 let Sphinx = new God("Sphinx",Hydra.x+cardSpace,level3+regularCard.height,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Sphinx,description.Sphinx);
 let Cerebus = new God("Cerebus",Colchian.x-cardSpace,level3+regularCard.height,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.underworld,domain.Cerebus,description.Cerebus);
 let Orthrus = new God("Orthrus",Cerebus.x-cardSpace,level3+regularCard.height,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Orthrus,description.Orthrus);
-let Cyclops = new God("The Cyclops",centers.large+smallCardBetween,level3+cardAbove,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Cyclops,description.Cyclops);
-let Hecatoncheires = new God("The Hecatoncheires",centers.large+smallCardBetween,Cyclops.y+smallCard.height+betweenCards,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Hecatoncheires,description.Hecatoncheires);
-let Giantes = new God("The Giantes",Cyclops.x+smallCard.width+smallCardBetween,level3+cardAbove,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Giantes,description.Giantes);
-let Erinyes = new God("The Erinyes",Cyclops.x+smallCard.width+smallCardBetween,Giantes.y+smallCard.height+betweenCards,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Erinyes,description.Erinyes);
-let Meliae = new God("The Meliaes",Cyclops.x+smallCard.width+smallCardBetween,Erinyes.y+smallCard.height+betweenCards,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.earth,domain.Meliae,description.Meliae);
+let Cyclops = new God("The Cyclops",centers.large-20,level3+cardAbove,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Cyclops,description.Cyclops);
+let Hecatoncheires = new God("The Hecatoncheires",centers.large-20,Cyclops.y+smallCard.height+betweenCards,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Hecatoncheires,description.Hecatoncheires);
+let Giantes = new God("The Giantes",Cyclops.x+smallCard.width+betweenCards+20,level3+cardAbove,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Giantes,description.Giantes);
+let Erinyes = new God("The Erinyes",Cyclops.x+smallCard.width+betweenCards+20,Giantes.y+smallCard.height+betweenCards,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Erinyes,description.Erinyes);
+let Meliae = new God("The Meliaes",Cyclops.x+smallCard.width+betweenCards+20,Erinyes.y+smallCard.height+betweenCards,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.earth,domain.Meliae,description.Meliae);
 let Iris = new God("Iris",Aether.x,level4,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Iris,description.Iris);
 let Harpies = new God("The Harpies",Iris.x+cardSpace,level4,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Harpies,description.Harpies);
 let Sirens = new God("The Sirens",Harpies.x+cardSpace,level4,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Sirens,description.Sirens);
@@ -686,9 +683,6 @@ function createTree(treeWidth,treeHeight){
                 .scaleExtent([0, 9])
                 .on("zoom", zoomed))
              .append("g");
-//    tooltip = d3.select("body").append("div")
-//                .attr("id", "tooltip")
-//                .style("opacity", 0);
 }
 
 function redraw(){
@@ -718,6 +712,10 @@ function pathMaker(pathType,source,target,name,union,id,marginX,down){
         source.children.add(id);
         source.childRect.add(target.rectID);
     }
+    if(pathType === singleParent3){
+        source.children.add(id);
+        source.childRect.add(target.rectID);
+    }
     if(pathType === spousePath){
         source.spouse.push(id);
         target.spouse.push(id);
@@ -729,22 +727,22 @@ function pathMaker(pathType,source,target,name,union,id,marginX,down){
    return line;
 }
 
-function incestSpouse(pathType,source,target,name,id,marginX,down1,down2){
+function incestSpouse(source,target,name,id,marginX,down1,side,down2){
   let line = tree.append("path")
                   .attr("class",name+" spouse")
                   .attr("id",id)
-                  .attr("d",spouseIncest(source,target,marginX,down1,down2));
+                  .attr("d",spouseIncest(source,target,marginX,down1,side,down2));
         linkIDs.push(id);
         source.spouse.push(id);
         target.spouse.push(id);
    return line;
 }
 
-function familyMaker(wife,husband,child,marginX,down1,down2,name,id){
+function familyMaker(familyType,wife,husband,child,marginX,down1,down2,name,id){
   let line = tree.append("path")
                   .attr("class",name+" child")
                   .attr("id",id)
-                  .attr("d",parentsChild(wife,husband,child,marginX,down1,down2));
+                  .attr("d",familyType(wife,husband,child,marginX,down1,down2));
     linkIDs.push(id);
     wife.children.add(id);
     wife.childRect.add(child.rectID);
@@ -761,9 +759,15 @@ function singleParent(source,target,marginX,down){
             "V"+target.y
 }
 
-function singleParent2(source,target,marginX,down){
+function singleParent2(source,target,marginX,side){
     return  "M"+(source.x+marginX+source.width)+","+(source.y+source.height/2)+
-            "h"+down+
+            "h"+side+
+            "V"+(target.y+target.height/2)+
+            "H"+target.x
+}
+
+function singleParent3(source,target,marginX,down){
+    return  "M"+(source.x+marginX+source.width/2)+","+(source.y+source.height/2)+
             "V"+(target.y+target.height/2)+
             "H"+target.x
 }
@@ -777,10 +781,10 @@ function spousePath(source,target,marginX,down){
 }
 
 //Spouse path function
-function spouseIncest(source,target,marginX,down1,down2){
+function spouseIncest(source,target,marginX,down1,side,down2){
      return  "M"+(source.x+marginX+source.width/2)+","+(source.y+source.height)+
             "v"+down1+
-            "H"+(target.x-20)+
+            "H"+(target.x-side)+
             "V"+(target.y+target.height+down2)+
             "H"+(target.x+target.width/2)+
             "V"+(target.y+target.height)
@@ -795,6 +799,14 @@ function parentsChild(wife,husband,child,marginX,down1,down2){
             "V"+(child.y)
 }
 
+//2 parents to child
+function parentsChild2(wife,husband,child,marginX,down1,down2){
+    var lowerCard = (wife.y > husband.y) ? wife : husband;
+    return "M"+(lowerCard.x+marginX)+","+(lowerCard.y+lowerCard.height+down1)+
+            "V"+(child.y+child.height/2)+
+            "H"+child.x
+}
+
 //************ Initializing calls ************//
 
 createTree(width,height);
@@ -806,42 +818,97 @@ makeCards();
 function makeConnections(){
     
     //****** make single Parent ******//
+    
+    //Chaos kids
     var primordials = [ErosElder,Tartarus,Gaia,Erebus,Nyx];
 
     for(let god of primordials){
-        pathMaker(singleParent,Chaos,god,lineType.main,"child","Chaos"+god.greekName,0,downLink);
+        pathMaker(singleParent,Chaos,god,lineType.main,"child","Chaos"+god.greekName,0,20);
     }
+   
+    //Gaia kids
     pathMaker(singleParent,Gaia,Ourea,lineType.earth,"child","GaiaOurea",-40,25);
     pathMaker(singleParent,Gaia,Pontus,lineType.water,"child","GaiaPontus",40,25);
     pathMaker(singleParent,Gaia,Uranus,lineType.sky,"child","GaiaUra",0,25);
     
-    pathMaker(singleParent2,Nyx,Moros,lineType.underworld,"child","NyxMoros",0,120);
-    pathMaker(singleParent2,Nyx,Ker,lineType.underworld,"child","NyxKer",0,120);
+    //Nyx kids
+    var NyxKids = [Moros,Ker,Thanatos,Hypnos,Oneriroi];
+    
+    for(let god of NyxKids){
+        pathMaker(singleParent2,Nyx,god,lineType.underworld,"child","Nyx"+god.greekName,0,140);
+    }
+    
+    var NyxKids2 = [Momus,Geras,Oizys,Nemesis,Philotes];
+    
+    for(let god of NyxKids2){
+        pathMaker(singleParent2,Nyx,god,lineType.underworld,"child","Nyx"+god.greekName,0,300);
+    }
+    
+    var NyxKids3 = [Apate,Eris,Moirai,Keres,Hesperides];
+    
+    for(let god of NyxKids3){
+        pathMaker(singleParent2,Nyx,god,lineType.underworld,"child","Nyx"+god.greekName,0,450);
+    }
+    
+    //Uranus kids
+    
+    var UranusKids = [Giantes,Erinyes,Meliae];
+    
+    for(let god of UranusKids){
+        pathMaker(singleParent3,Uranus,god,lineType.monster,"child","Uranus"+god.greekName,20,0);
+    }
 
     //****** make spouse connections ******//
-    pathMaker(spousePath,Gaia,Tartarus,lineType.personification,"spouse","GaiaTar",-50,10);
-    pathMaker(spousePath,Nyx,Erebus,lineType.personification,"spouse","NyxEre",0,10);
-    pathMaker(spousePath,Oceanus,Tethys,lineType.main,"spouse","OceTeth",0,20);
-    pathMaker(spousePath,Hyperion,Theia,lineType.main,"spouse","HypTheia",0,20);
-    pathMaker(spousePath,Coeus,Phoebe,lineType.main,"spouse","CoeusPhoebe",0,20);
+    pathMaker(spousePath,Gaia,Tartarus,lineType.monster,"spouse","GaiaTar",-50,10);
+    pathMaker(spousePath,Nyx,Erebus,lineType.underworld,"spouse","NyxEre",0,10);
+    pathMaker(spousePath,Oceanus,Tethys,lineType.water,"spouse","OceTeth",0,20);
+    pathMaker(spousePath,Hyperion,Theia,lineType.sky,"spouse","HypTheia",0,20);
+    pathMaker(spousePath,Coeus,Phoebe,lineType.sky,"spouse","CoeusPhoebe",0,20);
     pathMaker(spousePath,Kronos,Rhea,lineType.main,"spouse","KroRhea",0,20);
-    incestSpouse(spouseIncest,Gaia,Uranus,lineType.main,"GaiaUra2",-10,40,20);
-
-    //make child connections
+    pathMaker(spousePath,Typhon,Echidna,lineType.monster,"spouse","TyphonEchidna",0,20);
     
-    familyMaker(Gaia,Tartarus,Typhon,(Gaia.x-Tartarus.x)/2,30,100,lineType.monster,"GaiaTartarusTyphon");
+    pathMaker(spousePath,Zeus,Hera,lineType.main,"spouse","ZeusHera",0,20);
+    
+    incestSpouse(Gaia,Uranus,lineType.main,"GaiaUra2",-20,40,60,20);
+    incestSpouse(Gaia,Pontus,lineType.water,"GaiaPontus",20,40,20,20);
 
+    //****** make family connections ******//
+    
+    //Gaia and Tartarus Kids
+    familyMaker(parentsChild,Gaia,Tartarus,Typhon,(Gaia.x-Tartarus.x)/2,30,100,lineType.monster,"GaiaTartarusTyphon");
+    
+    familyMaker(parentsChild,Gaia,Tartarus,Echidna,(Gaia.x-Tartarus.x)/2,30,100,lineType.monster,"GaiaTartarusEchidna");
+    
+    //Typhon and Echidna Kids
+    var monsters = [Orthrus,Cerebus,Colchian,Chimera,Hydra,Sphinx];
+    
+    for (let monster of monsters){
+       familyMaker(parentsChild,Typhon,Echidna,monster,-20,20,20,lineType.monster,"TyphonEchidna"+monster.greekName); 
+    }
+
+    //Gaia and Uranus kids
     var titans = [Rhea,Kronos,Crius,Theia,Hyperion,Tethys,Oceanus,Themis,Iapetus,Mnemosyne,Coeus,Phoebe];
 
     for(let god of titans){
-        familyMaker(Gaia,Uranus,god,0,20,400,lineType.main,"GaiaUranus"+god.greekName);
+        familyMaker(parentsChild,Gaia,Uranus,god,-50,20,400,lineType.main,"GaiaUranus"+god.greekName);
     }
-
+    
+    familyMaker(parentsChild2,Gaia,Uranus,Cyclops,-40,20,50,lineType.monster,"GaiaUranusCyclops");
+    familyMaker(parentsChild2,Gaia,Uranus,Hecatoncheires,-40,20,50,lineType.monster,"GaiaUranusHecatonc");
+    
+    //Kronos and Rhea kids
     let olympians = [Zeus,Hera,Demeter,Poseidon,Hades,Hestia]
 
     for(let god of olympians){
-        familyMaker(Kronos,Rhea,god,-20,10,350,lineType.main,"RheaKronos"+god.greekName);
+        familyMaker(parentsChild,Kronos,Rhea,god,-30,20,350,lineType.main,"RheaKronos"+god.greekName);
     }
+    
+    //Erebus and Nyx Kids
+    familyMaker(parentsChild,Erebus,Nyx,Aether,((Erebus.x+regularCard.width-20)-Nyx.x)/2,10,40,lineType.sky,"NyxErebusAether");
+    
+    familyMaker(parentsChild,Erebus,Nyx,Hemera,((Erebus.x+regularCard.width-20)-Nyx.x)/2,10,40,lineType.sky,"NyxErebusHemera");
+    
+    familyMaker(parentsChild,Erebus,Nyx,Charon,((Erebus.x+regularCard.width)-Nyx.x)/2,10,40,lineType.underworld,"NyxErebusCharon");
 }
 
 //************ Make all the cards show up ************//
@@ -911,8 +978,6 @@ function highlight(parent,event){
     
     var toggle = (event === 'mouseover') ? '1' : '0';
     
-//    console.log(parent.greekName+" has "+parent.childRect.size+" children.")
-    
     var html = parent.greekName+" has "+parent.childRect.size+" children."; 
     
     d3.select('.tooltip').transition()
@@ -920,10 +985,10 @@ function highlight(parent,event){
                          .style("opacity", toggle);
     d3.select('.tooltip').html(html)
                          .style("position","absolute")
-                         .style("text-align","center")
+                         .style("text-align","Right")
                          .style("background","#FFFFFF")
-                         .style("left", (event.pageX + 10) + "px")
-                         .style("top", (event.pageY - 15) + "px");
+                         .style("left", (width/2) + "px")
+                         .style("top", "20px");
 }
 
 function highlightChildren(d,i){
