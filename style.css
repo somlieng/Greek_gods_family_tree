@@ -130,6 +130,11 @@ rect{
     fill:var(--mortal);
 }
 
+.line-mortal{
+    fill:none;
+    stroke:var(--mortal);
+}
+
 .line-main{
     fill:none;
     stroke:black;
