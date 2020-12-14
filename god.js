@@ -23,6 +23,23 @@ class God{
     //God cards
     view(){ 
     var picHeight = this.width-20;
+    var tooltipText = this.greekName+" has "+this.childRect.size+" children.";
+    var tooltip = tree.append("svg")
+                      .attr("id",this.greekName+"Tooltip")
+                      .style("visibility",'hidden');
+    tooltip.append("rect")
+           .attr("class","tooltipRect")
+           .attr("width",this.width+tooltipText.length*6)
+           .attr("height",30)
+           .attr("x",this.x-tooltipText.length*3)
+           .attr("y",this.y-35)
+           .attr("rx", 6)
+           .attr("ry", 6);
+    tooltip.append("text")
+           .text(tooltipText)
+           .attr("class",'tooltipText')
+           .attr("x",this.x+(this.width/2))
+           .attr("y",this.y-20);
     tree.append("rect") //add card
         .attr("x",this.x)
         .attr("y",this.y)

@@ -12,6 +12,10 @@ html{
     background-color: #FEFFF6;
 }
 
+svg{
+    overflow: visible;
+}
+
 button{
     position:fixed;
 	background-color:#0C9;
@@ -148,4 +152,13 @@ rect{
 
 .hitbox{
     fill:transparent;
+}
+
+.tooltipText{
+    fill:#474747;
+}
+
+.tooltipRect{
+    fill:#FEFFF6;
+    stroke: #474747;
 }

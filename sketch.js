@@ -1195,21 +1195,12 @@ function highlight(parent,event){
         }
     }
     
-    var toggle = (event === 'mouseover') ? '1' : '0';
+    var toggle = (event === 'mouseover') ? 'visible' : 'hidden';
+    var tooltip = parent.greekName+"Tooltip"
     
-    var html = parent.greekName+" has "+parent.childRect.size+" children."; 
-    
-    d3.select('.tooltip').transition()
+    d3.select('#'+tooltip).transition()
                          .duration('100')
-                         .style("opacity", toggle);
-    d3.select('.tooltip').html(html)
-                         .style("position","absolute")
-                         .style("text-align","Right")
-                         .style("background","#FFFFFF")
-//                         .style("left", parent.x + "px")
-//                         .style("top", parent.y - "px")
-                         .style("left", (width/2) + "px")
-                         .style("top", "20px");
+                         .style("visibility", toggle);
 }
 
 function highlightChildren(d,i){
