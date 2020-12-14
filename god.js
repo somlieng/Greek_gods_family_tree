@@ -10,10 +10,11 @@ class God{
         this.godType = godType;
         this.domain = domain;
         this.description = description;
-        this.children = new Set();
+        this.childLink = new Set();
         this.spouse = [];
         this.childRect = new Set();
         this.rectID = gName+"Rect";
+        this.children = [];
     }
     
     clickCard(){

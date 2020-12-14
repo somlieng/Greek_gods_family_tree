@@ -210,7 +210,7 @@ let domain = {  Chaos:"The Void",
                 Minotaur:"Half bull, half man"
              };
 
-let description = {  Chaos:"The Void",
+let description = {  Chaos:"The void state preceding the creation of the universe or cosmos in the Greek creation myths, or to the initial 'gap' created by the original separation of heaven and earth. From Chaos came the first 5 primoridial Greek Gods",
                 Gaia:"Mother Earth",
                 Tartarus:"Underworld",
                 ErosElder:"Love and Procreation",
@@ -706,15 +706,18 @@ function pathMaker(pathType,source,target,name,union,id,marginX,down){
                   .attr("d",pathType(source,target,marginX,down));
     linkIDs.push(id);
     if(pathType === singleParent){
-        source.children.add(id);
+        source.childLink.add(id);
+        source.children.push(target.greekName);
         source.childRect.add(target.rectID);
     }
     if(pathType === singleParent2){
-        source.children.add(id);
+        source.childLink.add(id);
+        source.children.push(target.greekName);
         source.childRect.add(target.rectID);
     }
     if(pathType === singleParent3){
-        source.children.add(id);
+        source.childLink.add(id);
+        source.children.push(target.greekName);
         source.childRect.add(target.rectID);
     }
     if(pathType === spousePath){
@@ -734,7 +737,8 @@ function zeusKids(source,target,name,id,marginX,down,side,down2){
                   .attr("id",id)
                   .attr("d",singleParent4(source,target,marginX,down,side,down2));
     linkIDs.push(id);
-    source.children.add(id);
+    source.childLink.add(id);
+    source.children.push(target.greekName);
     source.childRect.add(target.rectID);
    return line;
 }
@@ -756,9 +760,11 @@ function familyMaker(familyType,wife,husband,child,marginX,down1,down2,name,id){
                   .attr("id",id)
                   .attr("d",familyType(wife,husband,child,marginX,down1,down2));
     linkIDs.push(id);
-    wife.children.add(id);
+    wife.childLink.add(id);
+    wife.children.push(child.greekName);
     wife.childRect.add(child.rectID);
-    husband.children.add(id);
+    husband.childLink.add(id);
+    husband.children.push(child.greekName);
     husband.childRect.add(child.rectID);
     return line;
 }
@@ -858,9 +864,11 @@ function familyMaker6lines(wife,husband,child,marginX,down1,down2,bar,side,up,si
                   .attr("id",id)
                   .attr("d",parentsChild4(wife,husband,child,marginX,down1,down2,bar,side,up,side2));
     linkIDs.push(id);
-    wife.children.add(id);
+    wife.childLink.add(id);
+    wife.children.push(child.greekName);
     wife.childRect.add(child.rectID);
-    husband.children.add(id);
+    husband.childLink.add(id);
+    husband.children.push(child.greekName);
     husband.childRect.add(child.rectID);
     return line;
 }
@@ -1161,7 +1169,8 @@ function createModal(d,i){
     var name = godData.godName.value;
     var domain = godData.domain.value;
     var description = godData.description.value;
-    var modal = new Modal(name,domain,description);
+    var children = godMap[name].children;
+    var modal = new Modal(name,domain,description,children);
     d3.select('#modalContainer').html(modal.html);
     document.getElementById(name).style.display='block';
 }
@@ -1177,10 +1186,10 @@ function highlight(parent,event){
     for(let link of linkIDs){
         var color = (event === 'mouseover') ? 'grey' : '';
         var stroke = (event === 'mouseover') ? '4px' : '';
-        if(!parent.children.has(link)){
+        if(!parent.childLink.has(link)){
             document.getElementById(link).style.stroke = color;
         }
-        if(parent.children.has(link)){
+        if(parent.childLink.has(link)){
             document.getElementById(link).style.strokeWidth = stroke;
         }
     }
@@ -1238,15 +1247,25 @@ document.getElementById('legend').style.display='block';
 }
 
 //make Modal object
-function Modal(name,domain,description) {
+function Modal(name,domain,description,children) {
     
 //   var source;
 //   if(thumbnail === ""){
 //        source = 'img/bred_sheeran.jpg'
 //    } else{
-//        source = thumbnail};    
+//        source = thumbnail}; 
+    var list = "";
     
-  this.html = 
+    function listmaker(){
+        for(let i = 0; i<children.length;i++){
+            var child = "<li>"+children[i]+"</li>"
+            list += child;
+        }
+    }
+    
+    listmaker();
+    
+    this.html = 
     `<div id="${name}" class="w3-modal">
         <div class="w3-modal-content">
             <header class="w3-container"> 
@@ -1256,6 +1275,8 @@ function Modal(name,domain,description) {
           <div class="w3-container">
             <h4>${domain}</h4>
             <p>${description}</p>
+            <h4>${name}'s children include:</h4>
+            <ul>${list}</ul>
           </div>
         </div>
     </div>`;
