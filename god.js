@@ -13,7 +13,7 @@ class God{
         this.children = new Set();
         this.spouse = [];
         this.childRect = new Set();
-        this.rectID = "rect-"+gName;
+        this.rectID = gName;
     }
     
     clickCard(){
