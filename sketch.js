@@ -381,7 +381,7 @@ let Apate = new God("Apate",Momus.x+cardSpace,level3-cardSpace,null,smallCard.wi
 let Eris = new God("Eris",Momus.x+cardSpace,Moros.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Eris,description.Eris);
 let Moirai = new God("The Moirai",Momus.x+cardSpace,Ker.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Moirai,description.Moirai);
 let Keres = new God("The Keres",Momus.x+cardSpace,Thanatos.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Keres,description.Keres);
-let Hesperides = new God("The Hesperides",Momus.x+cardSpace,Hypnos.y+smallCard.height+betweenCards,null,smallCard.width,smallCard.height,smallCard.type,godType.earth,domain.Hesperides,description.Hesperides);
+let Hesperides = new God("The Hesperides",Momus.x+cardSpace,Hypnos.y+smallCard.height+betweenCards,null,smallCard.width*2,smallCard.height,smallCard.type,godType.earth,domain.Hesperides,description.Hesperides);
 
 let level4 = Uranus.y+(cardAbove);
 let level5 = Uranus.y+2*(cardAbove);
@@ -1158,12 +1158,15 @@ function makeTextWrap(){
 //click interaction for cards
 function createModal(d,i){
     var godData = d.srcElement.attributes;
+    console.log(godData);
     var name = godData.godName.value;
+    console.log(name);
     var domain = godData.domain.value;
     var description = godData.description.value;
     var modal = new Modal(name,domain,description);
     d3.select('#modalContainer').html(modal.html);
     document.getElementById(name).style.display='block';
+    console.log("CLICK");
 }
 
 //hightlight children for cards
