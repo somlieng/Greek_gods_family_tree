@@ -86,10 +86,10 @@ let domain = {  Chaos:"The Void",
                 Uranus:"Father Sky",
                 Ourea:"The Mountains",
                 Pontus:"The Sea",
-                Oceanus:"God of the Ocean",
+                Oceanus:"God of the River Oceanos",
                 Tethys:"Goddess of the Rivers",
                 Hyperion:"God of Light",
-                Theia:"Goddess of the Aether",
+                Theia:"Goddess of Sight and the Aether",
                 Crius:"God of the constellations",
                 Kronos:"God of the Harvest",
                 Rhea:"Goddess of Fertility",
@@ -132,9 +132,9 @@ let domain = {  Chaos:"The Void",
                 Colchian:"Guardian of the Golden Fleece",
                 Chimera:"Part lion, part goat, with a snake-headed tail",
                 Hydra:"Many headed serpent",
-                Sphinx:"",
-                Aether:"Day",
-                Hemera:"Light",
+                Sphinx:"Woman faced lion with wings",
+                Aether:"God of the upper sky",
+                Hemera:"Goddess of the day",
                 Thalassa:"Sea Goddess",
                 Charon:"Ferryman to the underworld",
                 Moros:"Doom",
@@ -207,24 +207,25 @@ let domain = {  Chaos:"The Void",
                 Tyche:"Good luck",
                 Perse:"Eldest Oceanid",
                 Circe:"Enchantress who turned men into pigs",
-                Minotaur:"Half bull, half man"
+                Minotaur:"Half bull, half man",
+                Perses:"Titan god of destruction"
              };
 
-let description = {  Chaos:"The void state preceding the creation of the universe or cosmos in the Greek creation myths, or to the initial 'gap' created by the original separation of heaven and earth. From Chaos came the first 5 primoridial Greek Gods",
-                Gaia:"Mother Earth",
-                Tartarus:"Underworld",
-                ErosElder:"Love and Procreation",
-                Erebus:"Darkness",
-                Nyx:"Night",
-                Uranus:"Father Sky",
-                Ourea:"The Mountains",
-                Pontus:"The Sea",
-                Oceanus:"God of the Ocean",
-                Tethys:"Goddess of the Rivers",
-                Hyperion:"God of Light",
-                Theia:"Goddess of the Aether",
-                Crius:"",
-                Kronos:"",
+let description = {  Chaos:"Chaos was the first of the primordial gods (protogenoi) to emerge at the dawn of creation. She was followed in quick succession by Gaia (Gaea, Earth), Tartaros (the Pit Below) and Eros (Procreation). Chaos represents the void state preceding the creation of the universe or cosmos in the Greek creation myths, or to the initial 'gap' created by the original separation of heaven and earth.<br><br><a href='https://www.theoi.com/Protogenos/Khaos.html'>Click here to learn more about Chaos</a>",
+                Gaia:"Gaia is the primordial goddess and personification of the Earth and is the ancestral mother of all life. She is the most important primordial god. She is the mother of the Titans and a plethora of other important figures in Greek mythology.<br><br>With her son, Uranus, she mothered the Cyclops, the Hecatoncheries, and the Titans. Uranus then locked the Cyclops and Hecatoncheries away inside Gaia, which caused Gaia great pain. So she created a sickle and conspired with her sons to avenge her. Hyperion, Crius, Coeus and Iapetus--posted at the four corners of the world--seized hold of their father and held him fast while Kronos castrated him with a sickle.<br><br>She is one of the 5 Greek primordial gods along with Eros, Tartarus, Erebus, and Nyx<br><br><a href='https://www.theoi.com/Protogenos/Gaia.html'>Click here to learn more about Gaia</a>",
+                Tartarus:"Tartarus is both a deity and a place in the underworld. As a place, Tartarus is used as a dungeon of torment and suffering for the wicked and as the prison for the Titans. Tartarus is the place where, souls are judged after death and where the wicked received divine punishment. He is one of the 5 Greek primordial gods along with Eros, Gaia, Erebus, and Nyx<br><br><a href='https://www.theoi.com/Protogenos/Tartaros.html'>Click here to learn more about Tartarus</a>",
+                ErosElder:"Not to be confused with the Eros the younger (also known as Cupid), this primordial god was born from Chaos and is the first personification of Love and Procreation. He is one of the 5 Greek primordial gods along with Tartarus, Gaia, Erebus, and Nyx<br><br><a href='https://www.theoi.com/Protogenos/Eros.html'>Click here to learn more about Eros</a>",
+                Erebus:"Erebus is the primordial god of darkness. Little is written about him in Greek literature and mythology. In Greek literature, the name Erebus is also used as a region of the Greek underworld where the dead pass immediately after dying, and is sometimes used interchangeably with Tartarus. He is one of the 5 Greek primordial gods along with Tartarus, Gaia, Eros, and Nyx<br><br><a href='https://www.theoi.com/Protogenos/Erebos.html'>Click here to learn more about Erebus</a>",
+                Nyx:"Nyx is the primordial goddess and personification of the night. Her appearances are sparse in surviving mythology, but is said to be a figure of such exceptional power and beauty that she is feared by Zeus himself. <br><br> According to Hesiod's Theogony, Nyx's daughter Hemera (Day) left Tartarus just as Nyx (Night) entered it; continuing cyclicly, when Hemera returned, Nyx left. She is one of the 5 Greek primordial gods along with Tartarus, Gaia, Eros, and Erebus<br><br><a href='https://www.theoi.com/Protogenos/Nyx.html'>Click here to learn more about Nyx</a>",
+                Uranus:"Uranus is the primordial god of the sky.In the Olympian creation myth, as Hesiod tells it in the Theogony, Uranus came every night to cover the earth and mate with Gaia, but he hated the younger children (The cyclops and the hecatoncheries) she bore him. Uranus imprisoned Gaia's youngest children inside Gaia, which caused Gaia great pain. So she created a sickle and conspired with her sons to avenge her. Hyperion, Crius, Coeus and Iapetus--posted at the four corners of the world--seized hold of their father and held him fast while Kronos castrated him with a sickle.<br><br>After he was castrasted, the blood that the landed on the Earth created the Erinyes (the Furies), the Giantes, and the Meliaes. From where his genitials landed in the sea birthed Aphrodite<br><br><a href='https://www.theoi.com/Protogenos/Ouranos.html'>Click here to learn more about Uranus</a>",
+                Ourea:"The Ourea were the primordial gods of the mountains. Each mountain was believed to have its own ancient deity. Mountains were depicted in classical art as old, bearded men partially emerged from between a pair of crags. The ten ourea were Aitna, Athos, Helikon, Kithairon, Nysos, Olympus I, Olympus II, Oreios, Parnes, and Tmolus <br><br><a href='https://www.theoi.com/Protogenos/Ourea.html'>Click here to learn more about the Ourea</a>",
+                Pontus:"Pontus is the primordial god of the sea. He was the sea itself, not merely its resident deity, who was born from earth at the dawn of creation. In Greco-Roman mosaics Pontos is depicted as a giant head with a watery-gray beard and crab-claw horns rising from the sea.<br><br><a href='https://www.theoi.com/Protogenos/Pontos.html'>Click here to learn more about Pontus</a>",
+                Oceanus:"Oceanus was the primordial Titan god of the great, earth-encircling River Okeanos, origin of all of the earth's fresh-water. He was the eldest of the Titan offspring of Uranus and Gaia. With his sister, Tethys, he is the father of the river gods (not included as there are 3000 of them), and the Nephelai (Clouds nymphs, not included on this chart), and the Oceanids, sea nymphs (there are also 3000 of them, but only 8 is included here).<br><br><a href='https://www.theoi.com/Titan/TitanOkeanos.html'>Click here to learn more about Oceanus</a>",
+                Tethys:"Tethys was the primordial Titan goddess of all fresh water. With her brother, Oceanus, she is the mother of the river gods (not included as there are 3000 of them), and the Nephelai (Clouds nymphs, not included on this chart), and the Oceanids, sea nymphs (there are also 3000 of them, but only 8 is included here).<br><br>Tethys had no active role in Greek mythology and no established cults. Her name was derived from the Greek word têthê meaning 'nurse' or 'grandmother'.<br><br><a href='https://www.theoi.com/Titan/TitanisTethys.html'>Click here to learn more about Tethys</a>",
+                Hyperion:"Hyperion was the Titan god of heavenly light. With his sister Theia, he is the father of the lights of heaven: Eos the Dawn, Helios the Sun, and Selene the Moon.<br><br>Hyperion was one of four Titan brothers who conspired with Kronos to castrate and depose their father Uranus. Hyperion, Crius, Coeus and Iapetus--posted at the four corners of the world--seized hold of their father and held him fast while Kronos castrated him with a sickle. As the father of the sun and dawn, Hyperion was no doubt regarded as the Titan of the pillar of the east. His brothers Koios, Krios and Iapetos presided respectively over the north, south and west.<br><br><a href='https://www.theoi.com/Titan/TitanHyperion.html'>Click here to learn more about Hyperion</a>",
+                Theia:"Theia was the Titan goddess of sight and the shining ether of the bright, blue sky. She was also, by extension, the goddess who endowed gold and silver with their brilliance and intrinsic value. With her brother Hyperion, she is the mother of the lights of heaven: Eos the Dawn, Helios the Sun, and Selene the Moon.<br><br><a href='https://www.theoi.com/Titan/TitanisTheia.html'>Click here to learn more about Theia</a>",
+                Crius:"Crius was the Titan god of constellations. Crius was one of four Titan brothers who conspired with Kronos to castrate and depose their father Uranus. Hyperion, Crius, Coeus and Iapetus--posted at the four corners of the world--seized hold of their father and held him fast while Kronos castrated him with a sickle. Crius represents the southern pillar as his name means 'the Ram',the constellation Aries, whose springtime rising in the south marked the start of the Greek year<br><br><a href='https://www.theoi.com/Titan/TitanKrios.html'>Click here to learn more about Crius</a>",
+                Kronos:"Kronos was the leader and youngest of the first generation of Titans, the divine descendants of Uranus and Gaia. He ruled the cosmos during the Golden Age after castrating and deposing his father, Uranus.<br><br>After dispatching Uranus, Cronus re-imprisoned the Hecatoncheires and the Cyclopes, which angered Gaia. Later, Kronos learned from Gaia and Uranus that he was destined to be overcome by his own sons, just as he and his brothers had overthrown his father. As a result, he devoured all of his children as soon as they were born to prevent the prophecy. When the sixth child, Zeus, was born, Rhea sought Gaia to devise a plan to save them. Rhea secretly gave birth to Zeus in Crete, and handed Cronus a stone wrapped in swaddling clothes, which he promptly swallowed, thinking that it was his son.<br><br> Once he had grown up, Zeus used an emetic to force Kronos to disgorge his siblings. After freeing his siblings, Zeus released the Hecatoncheires, and the Cyclopes who forged for him his thunderbolts, Poseidon's trident and Hades' helmet of darkness. In a vast war called the Titanomachy, Zeus and his older brothers and older sisters, with the help of the Hecatoncheires and Cyclopes, overthrew Kronos and the other Titans.<br><br><a href='https://www.theoi.com/Titan/TitanKronos.html'>Click here to learn more about Kronos</a>",
                 Rhea:"",
                 Themis:"",
                 Iapetus:"",
@@ -266,9 +267,9 @@ let description = {  Chaos:"The void state preceding the creation of the univers
                 Chimera:"",
                 Hydra:"",
                 Sphinx:"",
-                Aether:"Day",
-                Hemera:"Light",
-                Thalassa:"Sea Goddess",
+                Aether:"Aether is the personification of the 'upper sky' or the heavens. He embodies the pure upper air that the gods breathe, as opposed to the normal air (ἀήρ, aer) breathed by mortals.<br><br>In the evening his mother Nyx drew her dark veil across the sky, obscuring the ether and bringing night. In the morn his sister and wife Hemera dispersed night's mist to reveal the shining blue ether of day.<br><br><a href='https://www.theoi.com/Protogenos/Aither.html'>Click here to learn more about Aether</a>",
+                Hemera:"Hemera is the goddess of the daytime and the personification of day. According to Hesiod's Theogony, Hemera left Tartarus just as Nyx entered it; when Hemera returned, Nyx left.<br><br><a href='https://www.theoi.com/Protogenos/Hemera.html'>Click here to learn more about Hemera</a>",
+                Thalassa:"Thalassa was the primordial goddess of the sea. With her uncle, Pontus, she produced the fish and other sea creatures. Thalassa was the literal body of the sea and in the fables of Aesop, manifests as a woman formed of sea-water rising from her native element.<br><br>Thalassa is depicted in Greco-Roman mosaics as a matronly woman, half-submerged in the sea, with crab-claw horns, seaweed for clothes, and a ship's oar in her hand.<br><br><a href='https://www.theoi.com/Protogenos/Thalassa.html'>Click here to learn more about Thalassa</a>",
                 Charon:"Ferryman to the underworld",
                 Moros:"Doom",
                 Ker:"Violent death",
@@ -289,7 +290,7 @@ let description = {  Chaos:"The void state preceding the creation of the univers
                 Hecatoncheires:"Monster with 50 heads",
                 Giantes:"The Giants",
                 Erinyes:"The Furies",
-                Meliae:"Ash Tree Nymphs",
+                Meliae:"The Meliae are the nymphs of mountain ash-tree. According to Hesiod, the Meliae were born from the drops of blood that fell on Gaia when Kronos castrated Uranus.<br><br>The Meliae were the nurses for Zeus when his mother, Rhea, hid him away from his father. They were the wives of the Silver Race of Man and mothers of the Bronze, the third generation of mankind. They nursed their sons on the honey-sap of the ash, and armed them with spears crafted from the wood of their trees. The Bronze were an overly warlike race who incurred the wrath of Zeus and were destroyed in the floods of the Great Deluge.<br><br><a href='https://www.theoi.com/Nymphe/NymphaiMeliai.html'>Click here to learn more about The Meliae</a>",
                 Thamus:"Sea god",
                 Phorcys:"Sea god",
                 Ceto:"Sea goddess",
@@ -302,14 +303,14 @@ let description = {  Chaos:"The void state preceding the creation of the univers
                 Eurybia:"Sea goddess",
                 Nereus:"Old man of the sea",
                 Doris:"Oceanid",
-                Amphitrite:"Goddess of the sea",
+                Amphitrite:"Amphitrite is the goddess-queen of the sea, wife of Poseidon, and eldest of the fifty Nereides.She was the female personification of the sea--the loud-moaning mother of fish, seals and dolphins.<br><br>When Poseidon first sought Amphitrite's hand in marriage, she fled his advances, and hid herself away near Atlas in the Ocean stream at the far ends of the earth. The dolphin-god Delphin eventually tracked her down and persuaded her to return to wed the sea-king. She had many children with Poseidon, but only Triton is included in this chart.<br><br><a href='https://www.theoi.com/Pontios/Amphitrite.html'>Click here to learn more about Amphitrite</a>",
                 Helios:"The Sun",
                 Selene:"The Moon",
                 Eos:"Dawn",
                 Astraeus:"Dusk",
                 Anemoi:"The 4 winds",
                 Astra:"The Planets",
-                Asia:"Oceanid",
+                Asia:"Also known as Clymene, was one of the elder Oceanides and the Titan goddess of fame and renown. She was the wife of the Iapetus and the mother of Prometheus, Atlas, and Epimetheus.<br><br><a href='https://www.theoi.com/Titan/TitanisKlymene.html'>Click here to learn more about Asia</a>",
                 Atlas:"God who carried celestial sphere",
                 Prometheus:"God of Foresight. Creator of man",
                 Epimetheus:"God of Hindsight",
@@ -326,7 +327,7 @@ let description = {  Chaos:"The void state preceding the creation of the univers
                 Maia:"One of the Pleiades",
                 Leto:"Goddess",
                 Asteria:"Goddess of Falling stars",
-                Thetis:"Nereid leader",
+                Thetis:"Thetis is a goddess of the sea and the leader of the fifty Nereides. Like many other sea gods she possessed the gift of prophesy and power to change her shape at will.<br><br>Because of a prophesy that she was destined to bear a son greater than his father, Zeus had her marry a mortal man. Peleus, the chosen groom, was instructed to ambush her on the beach, and not release his grasp of the struggling goddess as she metamorphosed into a host of shapes. The couple were afterwards married in a ceremony attended by all the gods of heaven. She bore a son, the celebrated hero Achilles.<br><br><a href='https://www.theoi.com/Pontios/NereisThetis.html'>Click here to learn more about Thetis</a>",
                 Peleus:"Greek hero",
                 Achilles:"Hero of the Trojan War",
                 Theseus:"Killed the Minotaur, founder of Athens",
@@ -340,7 +341,8 @@ let description = {  Chaos:"The void state preceding the creation of the univers
                 Tyche:"Good luck",
                 Perse:"Eldest Oceanid",
                 Circe:"Enchantress who turned men into pigs",
-                Minotaur:"Half bull, half man"
+                Minotaur:"Half bull, half man",
+                Perses:"Perses is the Titan god of destruction. He is used known to be the father of Hecate, honoured by Zeus above all others as the goddess of magic, crossroads, and witchcraft.<br><br><a href='https://www.theoi.com/Titan/TitanPerses.html'>Click here to learn more about Hemera</a>"
              };
 
 //************make a shit ton of gods************//
@@ -448,8 +450,9 @@ let Pandora = new God("Pandora",Epimetheus.x+cardSpace,level6,"img/corgi.jpeg",r
 let Pleione = new God("Pleione",Atlas.x-cardSpace,level6,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Pleione,description.Pleione);
 let Tyche = new God("Tyche",Doris.x+cardSpaceSmall-40,level6A,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Tyche,description.Tyche);
 let Perse = new God("Perse",Tyche.x+cardSpaceSmall-40,level6A+60,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Perse,description.Perse);
-let Pallas = new God("Pallas",Astraeus.x+smallCard.width,level6A+80,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Pallas,description.Pallas);
+let Pallas = new God("Pallas",Astraeus.x+60,level6A+80,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Pallas,description.Pallas);
 let Styx = new God("Styx",Anemoi.x,level6A+80,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Styx,description.Styx);
+let Perses = new God("Perses",Pallas.x+smallCard.width+20,level6+cardSpaceSmall,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Perses,description.Perses);
 
 //level 7 gods
 let Zeus = new God("Zeus",(centers.large-cardWidth/2)-cardSpace/2,level7,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.sky,domain.Zeus,description.Zeus);
@@ -607,6 +610,7 @@ familyTree.push(Tyche);
 familyTree.push(Perse);
 familyTree.push(Styx);
 familyTree.push(Pallas);
+familyTree.push(Perses);
 //level 7
 familyTree.push(Zeus);
 familyTree.push(Hera);
@@ -933,9 +937,6 @@ function makeConnections(){
     for(let god of kidsZeusMortal){
         zeusKids(Zeus,god,lineType.mortal,"Zeus"+god.greekName,-10,240,-450,680);
     }
-   
-    //Asteria
-    pathMaker(singleParent,Asteria,Hecate,lineType.sky,"child","AsteriaHecate",0,400);
     
     //Poseidon kid
     pathMaker(singleParent,Poseidon,Theseus,lineType.water,"child","PoseidonTheseus",20,800);
@@ -979,6 +980,7 @@ function makeConnections(){
     incestSpouse(Zeus,Hera,lineType.main,"ZeusHera",40,20,-(smallCard.width/2)-10,0);
     incestSpouse(Zeus,Maia,lineType.sky,"ZeusMaia",10,210,70,20);
     incestSpouse(Zeus,Leto,lineType.sky,"ZeusLeto",0,230,-(smallCard.width/2),0);
+    incestSpouse(Perses,Asteria,lineType.sky,"Perses,Asteria",0,150,(smallCard.width/2)-20,20);
     incestSpouse(Hades,Persephone,lineType.underworld,"HadesPersephone",0,255,-(smallCard.width)-40,20);
     incestSpouse(Aphrodite,Ares,lineType.personification,"AresAphrodite",-20,20,-(smallCard.width),20);
     incestSpouse(Aphrodite,Hermes,lineType.personification,"AphroditeHermes",0,40,-(smallCard.width)+30,20);
@@ -1059,6 +1061,7 @@ function makeConnections(){
     //Crius and Eurybia kids
     familyMaker(parentsChild,Crius,Eurybia,Astraeus,120,20,20,lineType.sky,"CriusEurybiaAstraeus");
     familyMaker(parentsChild,Crius,Eurybia,Pallas,120,20,20,lineType.sky,"CriusEurybiaPallas");
+    familyMaker6lines(Crius,Eurybia,Perses,120,20,20,100,20,20,20,lineType.sky,"CriusEurybiaPerses")
     
     //Eos and Astraeus kids
     familyMaker(parentsChild,Eos,Astraeus,Anemoi,-20,20,20,lineType.sky,"EosAstraeusAnemoi");
@@ -1136,6 +1139,9 @@ function makeConnections(){
     
     //Minos and Pasiphae
     familyMaker(parentsChild,Minos,Pasiphae,Ariadne,0,20,40,lineType.mortal,"MinosPasiphaeAriadne");
+    
+    //Hecate and Perses
+    familyMaker(parentsChild,Perses,Asteria,Hecate,0,20,320,lineType.personification,"PersesAsteriaHecate");
 }
 
 //************ Make all the cards show up ************//
@@ -1257,6 +1263,9 @@ function Modal(name,domain,description,children) {
     var list = "";
     
     function listmaker(){
+        if(children.length === 0){
+            list = "<li>"+name+ " doesn't have any children"+"</li>"
+        }
         for(let i = 0; i<children.length;i++){
             var child = "<li>"+children[i]+"</li>"
             list += child;
