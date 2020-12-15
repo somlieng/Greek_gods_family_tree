@@ -162,3 +162,8 @@ rect{
     fill:#FEFFF6;
     stroke: #474747;
 }
+
+.caption{
+    fill:#474747;
+    text-anchor: start;
+}
