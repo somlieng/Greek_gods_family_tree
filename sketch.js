@@ -448,7 +448,7 @@ let Styx = new God("Styx",Anemoi.x,level6A+80,"img/corgi.jpeg",smallCard.width,s
 let Perses = new God("Perses",Pallas.x+smallCard.width+20,level6+cardSpaceSmall,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Perses,description.Perses);
 
 //level 7 gods
-let Zeus = new God("Zeus",(centers.large-cardWidth/2)-cardSpace/2,level7,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.sky,domain.Zeus,description.Zeus);
+let Zeus = new God("Zeus",(centers.large-cardWidth/2)-cardSpace/2,level7,"img/Zeus.png",largeCard.width,largeCard.height,largeCard.type,godType.sky,domain.Zeus,description.Zeus);
 let Hera = new God("Hera",(centers.large+cardWidth/2)+cardSpace/2,level7,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.sky,domain.Hera,description.Hera);
 let Hades = new God("Hades",Hera.x+cardSpace*2.5,level7,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.underworld,domain.Hades,description.Hades);
 let Hestia = new God("Hestia",Hades.x+cardSpace*2.5,level7,"img/corgi.jpeg",largeCard.width,largeCard.height,largeCard.type,godType.personification,domain.Hestia,description.Hestia);
