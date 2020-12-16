@@ -1166,7 +1166,7 @@ function createCaptions(){
     caption("by Europa",Minos.x+regularCard.width/2+5,level10-10);
     caption("Primorial Gods",Tartarus.x,level2-50);
     caption("The Titans",Crius.x,level5-120);
-    caption("The Olympians",Zeus.x,level7-70);
+    caption("The Olympians",Zeus.x,level7-75);
 }
 
 //************ Card interactions ************//
