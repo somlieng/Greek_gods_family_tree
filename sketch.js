@@ -431,12 +431,12 @@ let level7A = level7+cardAbove;
 //level 6 gods
 
 let Nereus = new God("Nereus",Oceanus.x-cardSpace*2,level6,"img/Nereus.png",regularCard.width,regularCard.height,regularCard.type,godType.water,domain.Nereus,description.Nereus);
-let Doris = new God("Doris",Nereus.x+cardSpace,level6+largeCard.height/2+20,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Doris,description.Doris);
-let Helios = new God("Helios",Hyperion.x,level6+20,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Helios,description.Helios);
-let Selene = new God("Selene",Helios.x+cardSpace,level6+20,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Selene,description.Selene);
+let Doris = new God("Doris",Nereus.x+cardSpace,level6+largeCard.height/2+20,null,smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Doris,description.Doris);
+let Helios = new God("Helios",Hyperion.x,level6+20,"img/Helios.png",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Helios,description.Helios);
+let Selene = new God("Selene",Helios.x+cardSpace,level6+20,"img/Selene.png",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Selene,description.Selene);
 let Eos = new God("Eos",Selene.x+cardSpace,level6+20,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Eos,description.Eos);
 let Astraeus = new God("Astraeus",Eos.x+cardSpace,level6+20,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Astraeus,description.Astraeus);
-let Anemoi = new God("Anemoi",Selene.x+cardSpace,level6+cardSpaceSmall,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Anemoi,description.Anemoi);
+let Anemoi = new God("Anemoi",Selene.x+cardSpace,level6+cardSpaceSmall,null,smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Anemoi,description.Anemoi);
 let Astra = new God("Astra Planeta",Anemoi.x+cardSpace,level6+cardSpaceSmall,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Astra,description.Astra);
 let Atlas = new God("Atlas",(Asia.x+Iapetus.x)/2+betweenCards,level6+40,"img/Atlas.png",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Atlas,description.Atlas);
 let Prometheus = new God("Prometheus",Atlas.x+cardSpace,level6+40,"img/Prometheus.png",regularCard.width,regularCard.height,regularCard.type,godType.personification,domain.Prometheus,description.Prometheus);
@@ -508,14 +508,14 @@ let Theseus = new God("Theseus",Achilles.x+cardSpace,level10,"img/corgi.jpeg",re
 let Perseus = new God("Perseus",Theseus.x+cardSpace,level10,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.mortal,domain.Perseus,description.Perseus);
 let Heracles = new God("Heracles",Perseus.x+cardSpace,level10,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.mortal,domain.Heracles,description.Heracles);
 let Helen = new God("Helen",Heracles.x+cardSpace,level10,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.mortal,domain.Helen,description.Helen);
-let Minos = new God("Minos",Helen.x+cardSpace,level10,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.mortal,domain.Minos,description.Minos);
-let Pasiphae = new God("Pasiphae",Minos.x+cardSpace,level10,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.water,domain.Pasiphae,description.Pasiphae);
-let Circe = new God("Circe",Pasiphae.x+cardSpace,level10,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.water,domain.Circe,description.Circe);
+let Minos = new God("Minos",Helen.x+cardSpace,level10,"img/Minos.png",regularCard.width,regularCard.height,regularCard.type,godType.mortal,domain.Minos,description.Minos);
+let Pasiphae = new God("Pasiphae",Minos.x+cardSpace,level10,"img/Pasiphae.png",regularCard.width,regularCard.height,regularCard.type,godType.water,domain.Pasiphae,description.Pasiphae);
+let Circe = new God("Circe",Pasiphae.x+cardSpace,level10,"img/Circe.png",regularCard.width,regularCard.height,regularCard.type,godType.water,domain.Circe,description.Circe);
 
 let level11 = Circe.y+cardAbove;
 
-let Ariadne = new God("Ariadne",(Pasiphae.x+Minos.x)/2+regularCard.width/2,level11,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.mortal,domain.Ariadne,description.Ariadne);
-let Dionysus = new God("Dionysus",Ariadne.x+cardSpace*2,level11,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.earth,domain.Dionysus,description.Dionysus);
+let Ariadne = new God("Ariadne",(Pasiphae.x+Minos.x)/2+regularCard.width/2,level11,"img/Ariadne.png",regularCard.width,regularCard.height,regularCard.type,godType.mortal,domain.Ariadne,description.Ariadne);
+let Dionysus = new God("Dionysus",Ariadne.x+cardSpace*2,level11,"img/Dionysus.png",regularCard.width,regularCard.height,regularCard.type,godType.earth,domain.Dionysus,description.Dionysus);
 let Minotaur = new God("Minotaur",Ariadne.x-cardSpace,level11,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Minotaur,description.Minotaur);
 
 //push them into an array
@@ -1160,6 +1160,10 @@ function createCaptions(){
     caption("The Horai (The Seasons)",Eunomia.x,level9-50);
     caption("Zeus's children by mortal women",Perseus.x+regularCard.width,level10-40);
     caption("by Alcmene",Heracles.x+regularCard.width/2+5,level10-10);
+    caption("by Aethra",Theseus.x+regularCard.width/2+5,level10-10);
+    caption("by Danae",Perseus.x+regularCard.width/2+5,level10-10);
+    caption("by Leda",Helen.x+regularCard.width/2+5,level10-10);
+    caption("by Europa",Minos.x+regularCard.width/2+5,level10-10);
 }
 
 //************ Card interactions ************//
