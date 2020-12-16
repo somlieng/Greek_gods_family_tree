@@ -488,7 +488,7 @@ let level9 = Aphrodite.y+cardAbove;
 //level 9
 let Ganymede = new God("Ganymede",Poseidon.x+largeCard.width,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.mortal,domain.Ganymede,description.Ganymede);
 let Persephone = new God("Persephone",Ganymede.x+cardSpace*1.5,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.underworld,domain.Persephone,description.Persephone);
-let Charities = new God("Charitites",Persephone.x+cardSpace*1.5,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification,domain.Charities,description.Charities);
+let Charities = new God("Charities",Persephone.x+cardSpace*1.5,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification,domain.Charities,description.Charities);
 let Dike = new God("Dike",Charities.x+cardSpace,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification,domain.Dike,description.Dike);
 let Eunomia = new God("Eunomia",Dike.x+cardSpace,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification,domain.Eunomia,description.Eunomia);
 let Eirene = new God("Eirene",Eunomia.x+cardSpace,level9,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification,domain.Eirene,description.Eirene);
@@ -1250,7 +1250,42 @@ function makeTextWrap(){
         .call(wrap,large);
     tree.select('#domain-Artemis')
         .call(wrap,large);
-    
+    tree.select('#domain-Persephone')
+        .call(wrap,regular);
+    tree.select('#domain-Charities')
+        .call(wrap,regular);
+    tree.select('#domain-Eunomia')
+        .call(wrap,regular);
+    tree.select('#domain-Psyche')
+        .call(wrap,regular);
+    tree.select('#domain-Hermaphrodites')
+        .call(wrap,regular);
+    tree.select('#domain-Muses')
+        .call(wrap,regular);
+    tree.select('#domain-Hecate')
+        .call(wrap,regular);
+    tree.select('#domain-Achilles')
+        .call(wrap,regular);
+    tree.select('#domain-Theseus')
+        .call(wrap,regular);
+    tree.select('#domain-Perseus')
+        .call(wrap,regular);
+    tree.select('#domain-Heracles')
+        .call(wrap,regular);
+    tree.select('#domain-Helen')
+        .call(wrap,regular);
+    tree.select('#domain-Minos')
+        .call(wrap,regular);
+    tree.select('#domain-Pasiphae')
+        .call(wrap,regular);
+    tree.select('#domain-Circe')
+        .call(wrap,regular);
+    tree.select('#domain-Minotaur')
+        .call(wrap,regular);
+    tree.select('#domain-Ariadne')
+        .call(wrap,regular);
+    tree.select('#domain-Dionysus')
+        .call(wrap,regular);
 }
 
 //click interaction for cards
