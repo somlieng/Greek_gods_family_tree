@@ -1164,6 +1164,9 @@ function createCaptions(){
     caption("by Danae",Perseus.x+regularCard.width/2+5,level10-10);
     caption("by Leda",Helen.x+regularCard.width/2+5,level10-10);
     caption("by Europa",Minos.x+regularCard.width/2+5,level10-10);
+    caption("Primorial Gods",Tartarus.x,level2-50);
+    caption("The Titans",Crius.x,level5-120);
+    caption("The Olympians",Zeus.x,level7-70);
 }
 
 //************ Card interactions ************//
