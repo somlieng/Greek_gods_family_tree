@@ -23,16 +23,16 @@ let margins = {top:50,
 let width = window.innerWidth;
 let height = window.innerHeight;
 
-let regularCard = {width: 100,
-                   height:150,
+let regularCard = {width: 120,
+                   height:180,
                    type:"regular"};
 
-let largeCard = {width: 120,
-                 height: 170,
+let largeCard = {width: 140,
+                 height: 200,
                  type:"large"};
 
-let smallCard = {width: 90,
-                 height: 40,
+let smallCard = {width: 120,
+                 height: 60,
                  type:"small"};
 
 let cardWidth = 40;
@@ -128,7 +128,7 @@ let domain = {  Chaos:"The Void",
                 Typhon:"Father of all monsters",
                 Echidna:"Mother of all monsters",
                 Orthrus:"Two-headed dog who guarded the cattle of Geryon",
-                Cerebus:"Three-headed dog who guarded the gates of the underworld",
+                Cerebus:"Three headed dog who guarded the gates of the underworld",
                 Colchian:"Guardian of the Golden Fleece",
                 Chimera:"Part lion, part goat, with a snake-headed tail",
                 Hydra:"Many headed serpent",
@@ -159,9 +159,9 @@ let domain = {  Chaos:"The Void",
                 Thamus:"Sea god",
                 Phorcys:"Sea god",
                 Ceto:"Sea goddess",
-                Iris:"Personification of the rainbow",
+                Iris:"Goddess of the rainbow",
                 Harpies:"Winged bird with female faces",
-                Gorgons:"Snake-headed women",
+                Gorgons:"Snake headed women",
                 Graeae:"3 witches who share an eye and a tooth",
                 Scylla:"Sea monster",
                 Eurybia:"Sea goddess",
@@ -209,8 +209,10 @@ let domain = {  Chaos:"The Void",
                 Perses:"Titan god of destruction"
              };
 
+//target="_blank"
+
 let description = {  Chaos:"Chaos was the first of the primordial gods (protogenoi) to emerge at the dawn of creation. She was followed in quick succession by Gaia (Gaea, Earth), Tartaros (the Pit Below) and Eros (Procreation). Chaos represents the void state preceding the creation of the universe or cosmos in the Greek creation myths, or to the initial 'gap' created by the original separation of heaven and earth.<br><br><a href='https://www.theoi.com/Protogenos/Khaos.html'>Click here to learn more about Chaos</a>",
-                Gaia:"Gaia is the primordial goddess and personification of the Earth and is the ancestral mother of all life. She is the most important primordial god. She is the mother of the Titans and a plethora of other important figures in Greek mythology.<br><br>With her son, Uranus, she mothered the Cyclops, the Hecatoncheries, and the Titans. Uranus then locked the Cyclops and Hecatoncheries away inside Gaia, which caused Gaia great pain. So she created a sickle and conspired with her sons to avenge her. Hyperion, Crius, Coeus and Iapetus--posted at the four corners of the world--seized hold of their father and held him fast while Kronos castrated him with a sickle.<br><br>She is one of the 5 Greek primordial gods along with Eros, Tartarus, Erebus, and Nyx<br><br><a href='https://www.theoi.com/Protogenos/Gaia.html'>Click here to learn more about Gaia</a>",
+                Gaia:"Gaia is the primordial goddess and personification of the Earth and is the ancestral mother of all life. She is the most important primordial god. She is the mother of the Titans and a plethora of other important figures in Greek mythology.<br><br>With her son, Uranus, she mothered the Cyclops, the Hecatoncheries, and the Titans. Uranus then locked the Cyclops and Hecatoncheries away inside Gaia, which caused Gaia great pain. So she created a sickle and conspired with her sons to avenge her. Hyperion, Crius, Coeus and Iapetus--posted at the four corners of the world--seized hold of their father and held him fast while Kronos castrated him with a sickle.<br><br>She is one of the 5 Greek primordial gods along with Eros, Tartarus, Erebus, and Nyx<br><br><a href='https://www.theoi.com/Protogenos/Gaia.html' target='_blank'>Click here to learn more about Gaia</a>",
                 Tartarus:"Tartarus is both a deity and a place in the underworld. As a place, Tartarus is used as a dungeon of torment and suffering for the wicked and as the prison for the Titans. Tartarus is the place where, souls are judged after death and where the wicked received divine punishment. He is one of the 5 Greek primordial gods along with Eros, Gaia, Erebus, and Nyx<br><br><a href='https://www.theoi.com/Protogenos/Tartaros.html'>Click here to learn more about Tartarus</a>",
                 ErosElder:"Not to be confused with the Eros the younger (also known as Cupid), this primordial god was born from Chaos and is the first personification of Love and Procreation. He is one of the 5 Greek primordial gods along with Tartarus, Gaia, Erebus, and Nyx<br><br><a href='https://www.theoi.com/Protogenos/Eros.html'>Click here to learn more about Eros</a>",
                 Erebus:"Erebus is the primordial god of darkness. Little is written about him in Greek literature and mythology. In Greek literature, the name Erebus is also used as a region of the Greek underworld where the dead pass immediately after dying, and is sometimes used interchangeably with Tartarus. He is one of the 5 Greek primordial gods along with Tartarus, Gaia, Eros, and Nyx<br><br><a href='https://www.theoi.com/Protogenos/Erebos.html'>Click here to learn more about Erebus</a>",
@@ -385,12 +387,12 @@ let level5 = Uranus.y+2*(cardAbove);
 //level 4
 let Typhon = new God("Typhon",ErosElder.x-cardSpace*2,level3+smallCard.height,null,smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Typhon,description.Typhon);
 let Echidna = new God("Echidna",Typhon.x+cardSpace,level3+smallCard.height,null,smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Echidna,description.Echidna);
-let Colchian = new God("Colchian-Dragon",(Typhon.x+Echidna.x)/2-cardSpace/2,level3+regularCard.height,"img/Colchian.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Colchian,description.Colchian);
-let Chimera = new God("Chimera",(Typhon.x+Echidna.x)/2+cardSpace/2,level3+regularCard.height,"img/Chimera.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Chimera,description.Chimera);
-let Hydra = new God("Hydra",Chimera.x+cardSpace,level3+regularCard.height,"img/Hydra.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Hydra,description.Hydra);
-let Sphinx = new God("Sphinx",Hydra.x+cardSpace,level3+regularCard.height,"img/Sphinx.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Sphinx,description.Sphinx);
-let Cerebus = new God("Cerebus",Colchian.x-cardSpace,level3+regularCard.height,"img/Cerebus.png",regularCard.width,regularCard.height,regularCard.type,godType.underworld,domain.Cerebus,description.Cerebus);
-let Orthrus = new God("Orthrus",Cerebus.x-cardSpace,level3+regularCard.height,"img/Orthrus.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Orthrus,description.Orthrus);
+let Colchian = new God("Colchian-Dragon",(Typhon.x+Echidna.x)/2-cardSpace/2,level3+regularCard.height+100,"img/Colchian.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Colchian,description.Colchian);
+let Chimera = new God("Chimera",(Typhon.x+Echidna.x)/2+cardSpace/2,level3+regularCard.height+100,"img/Chimera.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Chimera,description.Chimera);
+let Hydra = new God("Hydra",Chimera.x+cardSpace,level3+regularCard.height+100,"img/Hydra.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Hydra,description.Hydra);
+let Sphinx = new God("Sphinx",Hydra.x+cardSpace,level3+regularCard.height+100,"img/Sphinx.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Sphinx,description.Sphinx);
+let Cerebus = new God("Cerebus",Colchian.x-cardSpace,level3+regularCard.height+100,"img/Cerebus.png",regularCard.width,regularCard.height,regularCard.type,godType.underworld,domain.Cerebus,description.Cerebus);
+let Orthrus = new God("Orthrus",Cerebus.x-cardSpace,level3+regularCard.height+100,"img/Orthrus.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Orthrus,description.Orthrus);
 let Cyclops = new God("Cyclops",centers.large-20,level3+cardAbove,"null",smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Cyclops,description.Cyclops);
 let Hecatoncheires = new God("Hecatoncheires",centers.large-20,Cyclops.y+smallCard.height+betweenCards,"null",smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Hecatoncheires,description.Hecatoncheires);
 let Giantes = new God("Giantes",Cyclops.x+smallCard.width+betweenCards+20,level3+cardAbove,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.monster,domain.Giantes,description.Giantes);
@@ -400,9 +402,9 @@ let Iris = new God("Iris",Aether.x,level4,"img/Iris.png",regularCard.width,regul
 let Harpies = new God("Harpies",Iris.x+cardSpace,level4,"img/Harpies.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Harpies,description.Harpies);
 let Gorgons = new God("Gorgons",Harpies.x+cardSpace,level4,"img/Gorgons.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Gorgons,description.Gorgons);
 let Graeae = new God("Graeae",Gorgons.x+cardSpace,level4,"img/Graeae.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Graeae,description.Graeae);
-let Thamus = new God("Thamus",Thalassa.x,level3+cardTopSpace+60,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Thamus,description.Thamus);
-let Phorcys = new God("Phorcys",Gorgons.x,level3+cardTopSpace+60,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Phorcys,description.Phorcys);
-let Ceto = new God("Ceto",Graeae.x,level3+cardTopSpace+60,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Ceto,description.Ceto);
+let Thamus = new God("Thamus",Thalassa.x,level4-110,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Thamus,description.Thamus);
+let Phorcys = new God("Phorcys",Gorgons.x,level4-110,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Phorcys,description.Phorcys);
+let Ceto = new God("Ceto",Graeae.x,level4-110,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Ceto,description.Ceto);
 let Scylla = new God("Scylla",Graeae.x+cardSpace,level4,"img/Scylla.png",regularCard.width,regularCard.height,regularCard.type,godType.monster,domain.Scylla,description.Scylla);
 
 //level 5 gods
@@ -429,23 +431,23 @@ let level7A = level7+cardAbove;
 //level 6 gods
 
 let Nereus = new God("Nereus",Oceanus.x-cardSpace*2,level6,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.water,domain.Nereus,description.Nereus);
-let Doris = new God("Doris",Nereus.x+cardSpace,level6+largeCard.height/2,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Doris,description.Doris);
-let Helios = new God("Helios",Hyperion.x,level6,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Helios,description.Helios);
-let Selene = new God("Selene",Helios.x+cardSpace,level6,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Selene,description.Selene);
-let Eos = new God("Eos",Selene.x+cardSpace,level6,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Eos,description.Eos);
-let Astraeus = new God("Astraeus",Eos.x+cardSpace,level6,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Astraeus,description.Astraeus);
+let Doris = new God("Doris",Nereus.x+cardSpace,level6+largeCard.height/2+20,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Doris,description.Doris);
+let Helios = new God("Helios",Hyperion.x,level6+20,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Helios,description.Helios);
+let Selene = new God("Selene",Helios.x+cardSpace,level6+20,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Selene,description.Selene);
+let Eos = new God("Eos",Selene.x+cardSpace,level6+20,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Eos,description.Eos);
+let Astraeus = new God("Astraeus",Eos.x+cardSpace,level6+20,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Astraeus,description.Astraeus);
 let Anemoi = new God("Anemoi",Selene.x+cardSpace,level6+cardSpaceSmall,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Anemoi,description.Anemoi);
 let Astra = new God("Astra Planeta",Anemoi.x+cardSpace,level6+cardSpaceSmall,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Astra,description.Astra);
-let Atlas = new God("Atlas",(Asia.x+Iapetus.x)/2+betweenCards,level6,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Atlas,description.Atlas);
-let Prometheus = new God("Prometheus",Atlas.x+cardSpace,level6,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification,domain.Prometheus,description.Prometheus);
-let Epimetheus = new God("Epimetheus",Prometheus.x+cardSpace,level6,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification,domain.Epimetheus,description.Epimetheus);
-let Pandora = new God("Pandora",Epimetheus.x+cardSpace,level6,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.mortal,domain.Pandora,description.Pandora);
-let Pleione = new God("Pleione",Atlas.x-cardSpace,level6,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Pleione,description.Pleione);
-let Tyche = new God("Tyche",Doris.x+cardSpaceSmall-40,level6A,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Tyche,description.Tyche);
-let Perse = new God("Perseis",Tyche.x+cardSpaceSmall-40,level6A+60,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Perse,description.Perse);
-let Pallas = new God("Pallas",Astraeus.x+60,level6A+80,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Pallas,description.Pallas);
-let Styx = new God("Styx",Anemoi.x,level6A+80,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Styx,description.Styx);
-let Perses = new God("Perses",Pallas.x+smallCard.width+20,level6+cardSpaceSmall,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Perses,description.Perses);
+let Atlas = new God("Atlas",(Asia.x+Iapetus.x)/2+betweenCards,level6+40,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.sky,domain.Atlas,description.Atlas);
+let Prometheus = new God("Prometheus",Atlas.x+cardSpace,level6+40,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification,domain.Prometheus,description.Prometheus);
+let Epimetheus = new God("Epimetheus",Prometheus.x+cardSpace,level6+40,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.personification,domain.Epimetheus,description.Epimetheus);
+let Pandora = new God("Pandora",Epimetheus.x+cardSpace,level6+40,"img/corgi.jpeg",regularCard.width,regularCard.height,regularCard.type,godType.mortal,domain.Pandora,description.Pandora);
+let Pleione = new God("Pleione",Atlas.x-cardSpace,level6+cardSpaceSmall,null,smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Pleione,description.Pleione);
+let Tyche = new God("Tyche",Doris.x+cardSpaceSmall-40,level6A-10,null,smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Tyche,description.Tyche);
+let Perse = new God("Perseis",Tyche.x+cardSpaceSmall-40,level6A+60,null,smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Perse,description.Perse);
+let Pallas = new God("Pallas",Astraeus.x+100,level6A+60,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Pallas,description.Pallas);
+let Styx = new God("Styx",Anemoi.x,level6A+60,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.underworld,domain.Styx,description.Styx);
+let Perses = new God("Perses",Pallas.x+smallCard.width-30,level6+cardSpaceSmall,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Perses,description.Perses);
 
 //level 7 gods
 let Zeus = new God("Zeus",(centers.large-cardWidth/2)-cardSpace/2,level7,"img/Zeus.png",largeCard.width,largeCard.height,largeCard.type,godType.sky,domain.Zeus,description.Zeus);
@@ -462,10 +464,10 @@ let Nike = new God("Nike",(Styx.x+Pallas.x)/2,Kratos.y+cardSpaceSmallHeight,"img
 let Zelus = new God("Zelus",(Styx.x+Pallas.x)/2,Nike.y+cardSpaceSmallHeight,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Zelus,description.Zelus);
 let Bia = new God("Bia",(Styx.x+Pallas.x)/2,Zelus.y+cardSpaceSmallHeight,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.personification,domain.Bia,description.Bia);
 let Eurynome = new God("Eurynome",Poseidon.x+largeCard.width/2+cardSpaceSmall,level7A,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Eurynome,description.Eurynome);
-let Methis = new God("Methis",Eurynome.x+cardSpaceSmall,level7A-cardSpace,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Methis,description.Methis);
-let Maia = new God("Maia",(Hades.x+Hestia.x)/2-smallCard.width/2,level7A,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Maia,description.Maia);
+let Methis = new God("Methis",Eurynome.x+cardSpaceSmall-20,level7A-120,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.water,domain.Methis,description.Methis);
+let Maia = new God("Maia",(Hades.x+Hestia.x)/2,level7+largeCard.height/2,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Maia,description.Maia);
 let Leto = new God("Leto",Hestia.x+cardSpace,level7A,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Leto,description.Leto);
-let Asteria = new God("Asteria",Leto.x+cardSpace,level7A,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Asteria,description.Asteria);
+let Asteria = new God("Asteria",Leto.x+cardSpace+20,level7A,"img/corgi.jpeg",smallCard.width,smallCard.height,smallCard.type,godType.sky,domain.Asteria,description.Asteria);
 
 let level8 = Zeus.y+cardAbove*1.5;
 
@@ -897,19 +899,19 @@ function makeConnections(){
     var NyxKids = [Moros,Keres,Thanatos,Hypnos,Oneriroi];
     
     for(let god of NyxKids){
-        pathMaker(singleParent2,Nyx,god,lineType.underworld,"child","Nyx"+god.greekName,0,140);
+        pathMaker(singleParent2,Nyx,god,lineType.underworld,"child","Nyx"+god.greekName,0,160);
     }
     
     var NyxKids2 = [Momus,Geras,Oizys,Nemesis,Philotes];
     
     for(let god of NyxKids2){
-        pathMaker(singleParent2,Nyx,god,lineType.underworld,"child","Nyx"+god.greekName,0,300);
+        pathMaker(singleParent2,Nyx,god,lineType.underworld,"child","Nyx"+god.greekName,0,350);
     }
     
     var NyxKids3 = [Apate,Eris,Hesperides];
     
     for(let god of NyxKids3){
-        pathMaker(singleParent2,Nyx,god,lineType.underworld,"child","Nyx"+god.greekName,0,450);
+        pathMaker(singleParent2,Nyx,god,lineType.underworld,"child","Nyx"+god.greekName,0,510);
     }
     
     //Uranus kids
@@ -917,9 +919,9 @@ function makeConnections(){
     var UranusKids = [Giantes,Erinyes,Meliae];
     
     for(let god of UranusKids){
-        pathMaker(singleParent3,Uranus,god,lineType.monster,"child","Uranus"+god.greekName,20,0);
+        pathMaker(singleParent3,Uranus,god,lineType.monster,"child","Uranus"+god.greekName,40,0);
     }
-    zeusKids(Uranus,Aphrodite,lineType.personification,"UranusAphrodite",40,100,150,400);
+    zeusKids(Uranus,Aphrodite,lineType.personification,"UranusAphrodite",60,100,160,400);
     
     //Thamus kids
     pathMaker(singleParent,Thamus,Iris,lineType.water,"child","ThamusIris",0,20);
@@ -928,7 +930,7 @@ function makeConnections(){
     //Zeus kids
     var kidsZeusMortal = [Perseus,Heracles,Helen,Minos,Dionysus];
     for(let god of kidsZeusMortal){
-        zeusKids(Zeus,god,lineType.mortal,"Zeus"+god.greekName,-10,240,-450,680);
+        zeusKids(Zeus,god,lineType.mortal,"Zeus"+god.greekName,-10,240,-510,760);
     }
     
     //Poseidon kid
@@ -950,11 +952,11 @@ function makeConnections(){
     pathMaker(spousePath,Phorcys,Ceto,lineType.monster,"spouse","PhorcysCeto",0,20);
     pathMaker(spousePath,Crius,Eurybia,lineType.sky,"spouse","CriusEurybia",0,20);
     pathMaker(spousePath,Eos,Astraeus,lineType.sky,"spouse","EosAstraeus",0,20);
-    pathMaker(spousePath,Asia,Iapetus,lineType.personification,"spouse","AsiaIapetus",0,regularCard.height-20);
-    pathMaker(spousePath,Pleione,Atlas,lineType.sky,"spouse","PleioneAtlas",0,regularCard.height-20);
+    pathMaker(spousePath,Asia,Iapetus,lineType.personification,"spouse","AsiaIapetus",0,regularCard.height-40);
+    pathMaker(spousePath,Pleione,Atlas,lineType.sky,"spouse","PleioneAtlas",0,regularCard.height/2-45);
     pathMaker(spousePath,Epimetheus,Pandora,lineType.personification,"spouse","EpimetheusPandora",0,20);
     pathMaker(spousePath,Styx,Pallas,lineType.personification,"spouse","StyxPallas",0,20);
-    pathMaker(spousePath,Perse,Helios,lineType.sky,"spouse","PerseHelios",0,20);
+    pathMaker(spousePath,Perse,Helios,lineType.sky,"spouse","PerseHelios",0,30);
     pathMaker(spousePath,Nereus,Doris,lineType.water,"spouse","NereusDoris",0,20);
     pathMaker(spousePath,Poseidon,Amphitrite,lineType.water,"spouse","PoseidonAmphitrite",0,20);
     pathMaker(spousePath,Thetis,Peleus,lineType.mortal,"spouse","ThetisPeleus",0,20);
@@ -967,11 +969,11 @@ function makeConnections(){
     incestSpouse(Gaia,Pontus,lineType.water,"GaiaPontus",20,40,20,20);
     incestSpouse(Zeus,Themis,lineType.personification,"ZeusThemis",30,40,10,20);
     incestSpouse(Zeus,Mnemosyne,lineType.personification,"ZeusMnemosyne",20,60,70,20);
-    incestSpouse(Zeus,Demeter,lineType.earth,"ZeusDemeter",-40,60,-(largeCard.width/2),0);
-    incestSpouse(Zeus,Methis,lineType.water,"ZeusMethis",-30,80,-(smallCard.width/2),0);
-    incestSpouse(Zeus,Eurynome,lineType.water,"ZeusEurynome",-20,210,-(smallCard.width/2),0);
+    incestSpouse(Zeus,Demeter,lineType.earth,"ZeusDemeter",-40,100,-(largeCard.width/2),0);
+    incestSpouse(Zeus,Methis,lineType.water,"ZeusMethis",-30,120,-(smallCard.width/2),0);
+    incestSpouse(Zeus,Eurynome,lineType.water,"ZeusEurynome",-20,220,-(smallCard.width/2),0);
     incestSpouse(Zeus,Hera,lineType.main,"ZeusHera",40,20,-(smallCard.width/2)-10,0);
-    incestSpouse(Zeus,Maia,lineType.sky,"ZeusMaia",10,210,70,20);
+    incestSpouse(Zeus,Maia,lineType.sky,"ZeusMaia",10,150,40,20);
     incestSpouse(Zeus,Leto,lineType.sky,"ZeusLeto",0,230,-(smallCard.width/2),0);
     incestSpouse(Perses,Asteria,lineType.sky,"Perses,Asteria",0,150,(smallCard.width/2)-20,20);
     incestSpouse(Hades,Persephone,lineType.underworld,"HadesPersephone",0,255,-(smallCard.width)-40,20);
@@ -989,7 +991,7 @@ function makeConnections(){
     var monsters = [Orthrus,Cerebus,Colchian,Chimera,Hydra,Sphinx];
     
     for (let monster of monsters){
-       familyMaker(parentsChild,Typhon,Echidna,monster,-20,20,20,lineType.monster,"TyphonEchidna"+monster.greekName); 
+       familyMaker(parentsChild,Typhon,Echidna,monster,-20,20,40,lineType.monster,"TyphonEchidna"+monster.greekName); 
     }
 
     //Gaia and Uranus kids
@@ -1024,8 +1026,8 @@ function makeConnections(){
     for(let god of oceanKids1){
         familyMaker(parentsChild,Gaia,Pontus,god,20,20,20,lineType.water,"GaiaPontus"+god.greekName);
     }
-    familyMaker(parentsChild,Gaia,Pontus,Eurybia,100,40,420,lineType.water,"GaiaPontusEurybia");
-    familyMaker(parentsChild,Gaia,Pontus,Nereus,60,40,380,lineType.water,"GaiaPontusNereus");
+    familyMaker(parentsChild,Gaia,Pontus,Eurybia,120,40,420,lineType.water,"GaiaPontusEurybia");
+    familyMaker(parentsChild,Gaia,Pontus,Nereus,80,40,380,lineType.water,"GaiaPontusNereus");
     
     //Phorcys and Ceto
     var PhorcycsCetoKids = [Gorgons,Graeae,Scylla];
@@ -1043,7 +1045,7 @@ function makeConnections(){
     familyMaker(parentsChild,Oceanus,Tethys,Methis,0,140,200,lineType.water,"OceanusTethysMethis");
     familyMaker(parentsChild3,Oceanus,Tethys,Pleione,40,140,140,lineType.water,"OceanusTethysPleione");
     
-    familyMaker6lines(Oceanus,Tethys,Asia,-20,20,120,100,120,-180,20,lineType.water,"OceanusTethysAsia")
+    familyMaker6lines(Oceanus,Tethys,Asia,-20,20,120,100,120,-220,20,lineType.water,"OceanusTethysAsia")
     
     //Hyperion and Theia kids
     var skyKids = [Helios,Selene,Eos];
@@ -1071,21 +1073,21 @@ function makeConnections(){
     familyMaker(parentsChild,Coeus,Phoebe,Asteria,-20,20,500,lineType.sky,"CoeusPhoebeAsteria");
     
     //Pleione and Atlas kid
-    familyMaker(parentsChild,Pleione,Atlas,Maia,-20,20,100,lineType.sky,"PleioneAtlasMaia");
+    familyMaker(parentsChild,Pleione,Atlas,Maia,-20,20,80,lineType.sky,"PleioneAtlasMaia");
     
     //Styx and Pallas kids
     var styxPallas = [Kratos,Nike,Zelus,Bia];
     for(let god of styxPallas){
-        familyMaker(parentsChild2,Pallas,Styx,god,smallCard.width,20,30,lineType.personification,"StyxPallas"+god.greekName);
+        familyMaker(parentsChild2,Pallas,Styx,god,smallCard.width-10,20,30,lineType.personification,"StyxPallas"+god.greekName);
     }
     
     //Perse and Helio kids
-    familyMaker(parentsChild,Perse,Helios,Pasiphae,90,20,1150,lineType.sky,"PerseHeliosPasiphae");
-    familyMaker(parentsChild,Perse,Helios,Circe,90,20,1150,lineType.sky,"PerseHeliosCirce");
+    familyMaker(parentsChild,Perse,Helios,Pasiphae,100,30,1200,lineType.sky,"PerseHeliosPasiphae");
+    familyMaker(parentsChild,Perse,Helios,Circe,100,30,1200,lineType.sky,"PerseHeliosCirce");
     
     //Nereus and Doris kid
-    familyMaker(parentsChild,Nereus,Doris,Amphitrite,100,20,40,lineType.water,"NereusDorisAmphitrite");
-    familyMaker(parentsChild,Nereus,Doris,Thetis,100,20,200,lineType.water,"NereusDorisThetis");
+    familyMaker(parentsChild,Nereus,Doris,Amphitrite,20,20,100,lineType.water,"NereusDorisAmphitrite");
+    familyMaker(parentsChild,Nereus,Doris,Thetis,20,20,100,lineType.water,"NereusDorisThetis");
     
     //Amphitrite and Poseidon kid
     familyMaker(parentsChild,Amphitrite,Poseidon,Triton,((Amphitrite.x+regularCard.width)-Poseidon.x)/2,20,40,lineType.water,"AmphitritePoseidonTriton");
@@ -1094,7 +1096,7 @@ function makeConnections(){
     familyMaker(parentsChild,Thetis,Peleus,Achilles,((Thetis.x+smallCard.width)-Peleus.x)/2,20,100,lineType.mortal,"ThetisPeleusAchilles");
     
     //Eurynome and Zeus
-    familyMaker(parentsChild,Eurynome,Zeus,Charities,80,20,300,lineType.water,"EurynomeZeusCharities");
+    familyMaker(parentsChild,Eurynome,Zeus,Charities,80,10,320,lineType.water,"EurynomeZeusCharities");
     
     //Methis and Zeus
     familyMaker(parentsChild,Methis,Zeus,Athena,210,30,60,lineType.water,"MetisZeusAthena");
@@ -1108,24 +1110,24 @@ function makeConnections(){
     //Zeus and Themis kids
     var zeusThemis = [Dike,Eunomia,Eirene,Moirai];
     for(let god of zeusThemis){
-        familyMaker(parentsChild,Zeus,Themis,god,360,40,550,lineType.personification,"ZeusThemis"+god.greekName);
+        familyMaker(parentsChild,Zeus,Themis,god,410,40,600,lineType.personification,"ZeusThemis"+god.greekName);
     }
     
     //Zeus and Mnemosyne 
-    familyMaker(parentsChild,Mnemosyne,Zeus,muses,790,60,460,lineType.personification,"MnemosyneZeus9Muses");
+    familyMaker(parentsChild,Mnemosyne,Zeus,muses,largeCard.width*6+70,60,500,lineType.personification,"MnemosyneZeus9Muses");
     
     //Zeus and Maia 
-    familyMaker(parentsChild,Maia,Zeus,Hermes,0,20,60,lineType.sky,"MaiaZeusHermes");
+    familyMaker(parentsChild,Maia,Zeus,Hermes,largeCard.width*5,150,60,lineType.sky,"MaiaZeusHermes");
     
     //Zeus and Leto 
-    familyMaker(parentsChild,Leto,Zeus,Apollo,-30,40,60,lineType.sky,"LetoZeusApollo");
-    familyMaker(parentsChild,Leto,Zeus,Artemis,-30,40,60,lineType.sky,"LetoZeusArtemis");
+    familyMaker(parentsChild,Leto,Zeus,Apollo,-30,20,60,lineType.sky,"LetoZeusApollo");
+    familyMaker(parentsChild,Leto,Zeus,Artemis,-30,20,60,lineType.sky,"LetoZeusArtemis");
     
     //Zeus and Demeter 
-    familyMaker(parentsChild,Zeus,Demeter,Persephone,80,60,60,lineType.earth,"DemeterZeusPersephone");
+    familyMaker(parentsChild,Zeus,Demeter,Persephone,90,100,60,lineType.earth,"DemeterZeusPersephone");
     
     //Ares and Aphrodite 
-    familyMaker(parentsChild,Ares,Aphrodite,Eros,0,20,60,lineType.personification,"AresAphroditeEros");
+    familyMaker(parentsChild,Ares,Aphrodite,Eros,20,20,50,lineType.personification,"AresAphroditeEros");
     
     //Aphrodite and Hermes 
     familyMaker(parentsChild,Aphrodite,Hermes,Hermaphrodites,0,40,70,lineType.personification,"AphroditeHermesHermaphrodites");
@@ -1168,6 +1170,87 @@ function makeTextWrap(){
     
     tree.select('#domain-Eros-Elder')
         .call(wrap, regular);
+    tree.select('#domain-Orthrus')
+        .call(wrap,regular);
+    tree.select('#domain-Cerebus')
+        .call(wrap,regular);
+    tree.select('#domain-Colchian-Dragon')
+        .call(wrap,regular);
+    tree.select('#domain-Chimera')
+        .call(wrap,regular);
+    tree.select('#domain-Hydra')
+        .call(wrap,regular);
+    tree.select('#domain-Sphinx')
+        .call(wrap,regular);
+    tree.select('#domain-Charon')
+        .call(wrap,regular);
+    tree.select('#domain-Iris')
+        .call(wrap,regular);
+    tree.select('#domain-Harpies')
+        .call(wrap,regular);
+    tree.select('#domain-Gorgons')
+        .call(wrap,regular);
+    tree.select('#domain-Graeae')
+        .call(wrap,regular);
+    tree.select('#domain-Nereus')
+        .call(wrap,regular);
+    tree.select('#domain-Oceanus')
+        .call(wrap,regular);
+    tree.select('#domain-Tethys')
+        .call(wrap,regular);
+    tree.select('#domain-Theia')
+        .call(wrap,regular);
+    tree.select('#domain-Crius')
+        .call(wrap,regular);
+    tree.select('#domain-Kronos')
+        .call(wrap,regular);
+    tree.select('#domain-Rhea')
+        .call(wrap,regular);
+    tree.select('#domain-Themis')
+        .call(wrap,regular);
+    tree.select('#domain-Iapetus')
+        .call(wrap,regular);
+    tree.select('#domain-Mnemosyne')
+        .call(wrap,regular);
+    tree.select('#domain-Coeus')
+        .call(wrap,regular);
+    tree.select('#domain-Phoebe')
+        .call(wrap,regular);
+    tree.select('#domain-Epimetheus')
+        .call(wrap,regular);
+    tree.select('#domain-Prometheus')
+        .call(wrap,regular);
+    tree.select('#domain-Atlas')
+        .call(wrap,regular);
+    tree.select('#domain-Amphitrite')
+        .call(wrap,regular);
+    tree.select('#domain-Demeter')
+        .call(wrap,large);
+    tree.select('#domain-Zeus')
+        .call(wrap,large);
+    tree.select('#domain-Hera')
+        .call(wrap,large);
+    tree.select('#domain-Hades')
+        .call(wrap,large);
+    tree.select('#domain-Hestia')
+        .call(wrap,large);
+    tree.select('#domain-Triton')
+        .call(wrap,regular);
+    tree.select('#domain-Hebe')
+        .call(wrap,regular);
+    tree.select('#domain-Athena')
+        .call(wrap,large);
+    tree.select('#domain-Aphrodite')
+        .call(wrap,large);
+    tree.select('#domain-Adonis')
+        .call(wrap,regular);
+    tree.select('#domain-Hermes')
+        .call(wrap,large);
+    tree.select('#domain-Apollo')
+        .call(wrap,large);
+    tree.select('#domain-Artemis')
+        .call(wrap,large);
+    
 }
 
 //click interaction for cards
