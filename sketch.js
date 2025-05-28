@@ -1432,7 +1432,7 @@ function controlsModal() {
               <li>Zoom: Use either your trackpad or mouse scroll to zoom in and out of the family tree</li>
               <li>Hover: Hover over a deity with children. All of that deity's children will highlighted.</li>
               <li>Click: Click on the card to read more information about that deity</li>
-              <li>Redraw: While the tree is resposive, there is a quirk where the preserved aspect ratio will cut off the tree. Click redraw to redraw the tree to fit your screen better.</li>
+              <li>Redraw: While the tree is responsive, there is a quirk where the preserved aspect ratio will cut off the tree. Click redraw to redraw the tree to fit your screen better.</li>
             </ul>
             <p>If you ever need a quick refresh of the controls, click the controls button on the top left.</p>
           </div>
