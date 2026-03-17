@@ -23,16 +23,16 @@ let margins = {top:50,
 let width = window.innerWidth;
 let height = window.innerHeight;
 
-let regularCard = {width: 120,
-                   height:180,
+let regularCard = {width: 145,
+                   height:215,
                    type:"regular"};
 
-let largeCard = {width: 140,
-                 height: 200,
+let largeCard = {width: 145,
+                 height: 215,
                  type:"large"};
 
 let smallCard = {width: 120,
-                 height: 60,
+                 height: 70,
                  type:"small"};
 
 let cardWidth = 40;
@@ -54,6 +54,11 @@ let centers ={regular:width/2-regularCard.width/2,
              };
 
 let familyTree = [];
+
+//Language & Greek toggle state
+let currentLang = 'en';
+let showGreek = false;
+let languages = Object.keys(i18n);
 
 let lineType = {main:"line-main",
                 child:"line-child",
@@ -685,14 +690,208 @@ function createTree(treeWidth,treeHeight){
 }
 
 function redraw(){
-       
+
     width = window.innerWidth;
     height = window.innerHeight;
     document.getElementById('familyTree').innerHTML = ''
     createTree(width,height);
     makeConnections();
+    createCaptions();
     makeCards();
-    
+    updateDisplayText();
+}
+
+//************ Language & Greek helpers ************//
+
+function getKey(godName){
+    return godNameToKey[godName] || godName;
+}
+
+function getDisplayName(godName){
+    if(showGreek) return greekNames[godName] || godName;
+    if(currentLang === 'en') return godName;
+    return i18n[currentLang]?.names?.[godName] || godName;
+}
+
+function getDisplayDomain(godName){
+    var key = getKey(godName);
+    if(currentLang === 'en') return domain[key];
+    return i18n[currentLang]?.domains?.[key] || domain[key];
+}
+
+function getDisplayDescription(godName){
+    var key = getKey(godName);
+    if(currentLang === 'en') return description[key];
+    return i18n[currentLang]?.descriptions?.[key] || description[key];
+}
+
+function getTooltipText(god){
+    var displayName = getDisplayName(god.greekName);
+    var count = god.childRect.size;
+    if(currentLang !== 'en' && i18n[currentLang]){
+        var ui = i18n[currentLang].ui;
+        return displayName + ui.hasChildren + count + ui.children;
+    }
+    return displayName + " has " + count + " children.";
+}
+
+function getCaptionText(captionKey){
+    if(currentLang === 'en'){
+        var captions = {
+            horai: "The Horai (The Seasons)",
+            zeusMortals: "Zeus's children by mortal women",
+            byAlcmene: "by Alcmene",
+            byAethra: "by Aethra",
+            byDanae: "by Danae",
+            byLeda: "by Leda",
+            byEuropa: "by Europa",
+            primordial: "Primorial Gods",
+            titans: "The Titans",
+            olympians: "The Olympians"
+        };
+        return captions[captionKey];
+    }
+    return i18n[currentLang]?.captions?.[captionKey] || captionKey;
+}
+
+function updateDisplayText(){
+    for(var i = 0; i < familyTree.length; i++){
+        var god = familyTree[i];
+        var displayName = getDisplayName(god.greekName);
+        var displayDomain = getDisplayDomain(god.greekName);
+
+        //Update name text (clear tspans by setting text directly)
+        var nameEl = tree.select('#name-'+CSS.escape(god.greekName));
+        if(nameEl.node()){
+            nameEl.text(null);
+            nameEl.text(displayName);
+            //Apply Greek font class if showing Greek
+            if(showGreek){
+                nameEl.classed('greek-font', true);
+            } else {
+                nameEl.classed('greek-font', false);
+            }
+        }
+
+        //Update domain text
+        var domainEl = tree.select('#domain-'+CSS.escape(god.greekName));
+        if(domainEl.node()){
+            domainEl.text(null);
+            domainEl.text(displayDomain);
+        }
+
+        //Update tooltip text
+        var tooltipEl = tree.select('#'+CSS.escape(god.greekName)+'TooltipText');
+        if(tooltipEl.node()){
+            tooltipEl.text(getTooltipText(god));
+        }
+    }
+
+    //Wrap all text that overflows card width
+    wrapAllText();
+
+    //Update captions
+    updateCaptions();
+}
+
+function wrapAllText(){
+    for(var i = 0; i < familyTree.length; i++){
+        var god = familyTree[i];
+        var cardWidth = god.width - 10;
+        var nameEl = tree.select('#name-'+CSS.escape(god.greekName));
+        var domainEl = tree.select('#domain-'+CSS.escape(god.greekName));
+
+        //Wrap name if too long
+        var nameWrapped = false;
+        if(nameEl.node() && nameEl.node().getComputedTextLength && nameEl.node().getComputedTextLength() > cardWidth){
+            nameEl.call(wrap, cardWidth);
+            nameWrapped = true;
+            if(showGreek){
+                nameEl.selectAll('tspan').classed('greek-font', true);
+            }
+        }
+
+        //Wrap domain if too long
+        var domainWrapped = false;
+        if(domainEl.node() && domainEl.node().getComputedTextLength && domainEl.node().getComputedTextLength() > cardWidth){
+            domainEl.call(wrap, cardWidth);
+            domainWrapped = true;
+        }
+
+        //Adjust vertical positions on small cards to prevent overlap
+        if(god.cardType === 'small' && (nameWrapped || domainWrapped)){
+            var nameLines = nameWrapped ? nameEl.selectAll('tspan').size() : 1;
+            var baseNameY = god.y + (god.height/2) - 5;
+            var shift = (nameLines - 1) * 7;
+            if(nameEl.node()) nameEl.attr('y', baseNameY - shift);
+            if(nameWrapped) nameEl.selectAll('tspan').attr('y', baseNameY - shift);
+            if(domainEl.node()) domainEl.attr('y', baseNameY - shift + nameLines * 13 + 2);
+            if(domainWrapped) domainEl.selectAll('tspan').attr('y', baseNameY - shift + nameLines * 13 + 2);
+        }
+    }
+}
+
+function updateCaptions(){
+    tree.select('#caption-horai').text(getCaptionText('horai'));
+    tree.select('#caption-zeusMortals').text(getCaptionText('zeusMortals'));
+    tree.select('#caption-byAlcmene').text(getCaptionText('byAlcmene'));
+    tree.select('#caption-byAethra').text(getCaptionText('byAethra'));
+    tree.select('#caption-byDanae').text(getCaptionText('byDanae'));
+    tree.select('#caption-byLeda').text(getCaptionText('byLeda'));
+    tree.select('#caption-byEuropa').text(getCaptionText('byEuropa'));
+    tree.select('#caption-primordial').text(getCaptionText('primordial'));
+    tree.select('#caption-titans').text(getCaptionText('titans'));
+    tree.select('#caption-olympians').text(getCaptionText('olympians'));
+}
+
+function populateLangDropdown(){
+    var sel = document.getElementById('langBtn');
+    sel.innerHTML = '';
+    languages.forEach(function(lang){
+        var opt = document.createElement('option');
+        opt.value = lang;
+        opt.textContent = lang.toUpperCase();
+        if(lang === currentLang) opt.selected = true;
+        sel.appendChild(opt);
+    });
+}
+
+function getUIText(key, fallback){
+    var ui = (currentLang !== 'en' && i18n[currentLang]) ? i18n[currentLang].ui : null;
+    return (ui && ui[key]) ? ui[key] : fallback;
+}
+
+function updateButtonLabels(){
+    document.getElementById('controls').textContent = getUIText('btnControls','Controls');
+    document.getElementById('redraw').textContent = getUIText('btnReset','Reset');
+    document.getElementById('legends').textContent = getUIText('btnLegend','Legend');
+    var greekBtn = document.getElementById('greekBtn');
+    if(showGreek){
+        greekBtn.textContent = getUIText('btnGreekOff','ABC');
+    } else {
+        greekBtn.textContent = getUIText('btnGreek','Greek');
+    }
+}
+
+function toggleGreek(){
+    showGreek = !showGreek;
+    var btn = document.getElementById('greekBtn');
+    if(showGreek){
+        btn.classList.add('active');
+    } else {
+        btn.classList.remove('active');
+    }
+    updateButtonLabels();
+    updateDisplayText();
+}
+
+function setLang(lang){
+    currentLang = lang;
+    document.getElementById('langBtn').value = lang;
+    var modalSelect = document.getElementById('modalLangSelect');
+    if(modalSelect) modalSelect.value = lang;
+    updateButtonLabels();
+    updateDisplayText();
 }
 
 //************Functions to make paths************//
@@ -876,6 +1075,7 @@ createTree(width,height);
 makeConnections();
 createCaptions();
 makeCards();
+updateDisplayText();
 
 //************ Make links between family members ************//
 
@@ -1157,16 +1357,16 @@ function makeCards(){
 //************ Make all captions ************//
 
 function createCaptions(){
-    caption("The Horai (The Seasons)",Eunomia.x,level9-50);
-    caption("Zeus's children by mortal women",Perseus.x+regularCard.width,level10-40);
-    caption("by Alcmene",Heracles.x+regularCard.width/2+5,level10-10);
-    caption("by Aethra",Theseus.x+regularCard.width/2+5,level10-10);
-    caption("by Danae",Perseus.x+regularCard.width/2+5,level10-10);
-    caption("by Leda",Helen.x+regularCard.width/2+5,level10-10);
-    caption("by Europa",Minos.x+regularCard.width/2+5,level10-10);
-    caption("Primorial Gods",Tartarus.x,level2-50);
-    caption("The Titans",Crius.x,level5-120);
-    caption("The Olympians",Zeus.x,level7-75);
+    caption("The Horai (The Seasons)",Eunomia.x,level9-50,"caption-horai");
+    caption("Zeus's children by mortal women",Perseus.x+regularCard.width,level10-40,"caption-zeusMortals");
+    caption("by Alcmene",Heracles.x+regularCard.width/2+5,level10-10,"caption-byAlcmene");
+    caption("by Aethra",Theseus.x+regularCard.width/2+5,level10-10,"caption-byAethra");
+    caption("by Danae",Perseus.x+regularCard.width/2+5,level10-10,"caption-byDanae");
+    caption("by Leda",Helen.x+regularCard.width/2+5,level10-10,"caption-byLeda");
+    caption("by Europa",Minos.x+regularCard.width/2+5,level10-10,"caption-byEuropa");
+    caption("Primorial Gods",Tartarus.x,level2-50,"caption-primordial");
+    caption("The Titans",Crius.x,level5-120,"caption-titans");
+    caption("The Olympians",Zeus.x,level7-75,"caption-olympians");
 }
 
 //************ Card interactions ************//
@@ -1299,10 +1499,11 @@ function makeTextWrap(){
 function createModal(d,i){
     var godData = d.srcElement.attributes;
     var name = godData.godName.value;
-    var domain = godData.domain.value;
-    var description = godData.description.value;
-    var children = godMap[name].children;
-    var modal = new Modal(name,domain,description,children);
+    var displayName = getDisplayName(name);
+    var displayDomain = getDisplayDomain(name);
+    var displayDescription = getDisplayDescription(name);
+    var children = godMap[name].children.map(function(c){ return getDisplayName(c); });
+    var modal = new Modal(displayName,displayDomain,displayDescription,children,name);
     d3.select('#modalContainer').html(modal.html);
     document.getElementById(name).style.display='block';
 }
@@ -1379,38 +1580,47 @@ document.getElementById('legend').style.display='block';
 }
 
 //make Modal object
-function Modal(name,domain,description,children) {
-    
-//   var source;
-//   if(thumbnail === ""){
-//        source = 'img/bred_sheeran.jpg'
-//    } else{
-//        source = thumbnail}; 
+function Modal(name,domainText,descriptionText,children,internalName) {
+
+    var modalId = internalName || name;
     var list = "";
-    
+
     function listmaker(){
         if(children.length === 0){
-            list = "<li>"+name+ " doesn't have any children"+"</li>"
+            var noChildText;
+            if(currentLang !== 'en' && i18n[currentLang]){
+                noChildText = name + i18n[currentLang].ui.noChildren;
+            } else {
+                noChildText = name + " doesn't have any children";
+            }
+            list = "<li>"+noChildText+"</li>";
         }
         for(let i = 0; i<children.length;i++){
             var child = "<li>"+children[i]+"</li>"
             list += child;
         }
     }
-    
+
     listmaker();
-    
-    this.html = 
-    `<div id="${name}" class="w3-modal">
+
+    var childrenTitle;
+    if(currentLang !== 'en' && i18n[currentLang]){
+        childrenTitle = i18n[currentLang].ui.childrenOnChart.replace('{name}',name);
+    } else {
+        childrenTitle = name + "'s children on this chart include:";
+    }
+
+    this.html =
+    `<div id="${modalId}" class="w3-modal">
         <div class="w3-modal-content">
-            <header class="w3-container"> 
-                <span onclick="document.getElementById('${name}').style.display='none'"class="w3-button w3-display-topright">&times;</span>
+            <header class="w3-container">
+                <span onclick="document.getElementById('${modalId}').style.display='none'"class="w3-button w3-display-topright">&times;</span>
                 <h2>${name}</h2>
             </header>
           <div class="w3-container">
-            <h4>${domain}</h4>
-            <p>${description}</p>
-            <h4>${name}'s children on this chart include:</h4>
+            <h4>${domainText}</h4>
+            <p>${descriptionText}</p>
+            <h4>${childrenTitle}</h4>
             <ul>${list}</ul>
           </div>
         </div>
@@ -1419,22 +1629,44 @@ function Modal(name,domain,description,children) {
 
 //make controls Modal object
 function controlsModal() {
-  this.html = 
+  var ui = (currentLang !== 'en' && i18n[currentLang]) ? i18n[currentLang].ui : null;
+
+  var title = ui ? ui.controlsTitle : "Greek Mythology Family Tree";
+  var welcome = ui ? ui.controlsWelcome : "Welcome to the messy and incestous world of Greek mythology! Here are the controls you might use to fully explore this weird family";
+  var zoom = ui ? ui.controlZoom : "Zoom: Use either your trackpad or mouse scroll to zoom in and out of the family tree";
+  var hover = ui ? ui.controlHover : "Hover: Hover over a deity with children. All of that deity's children will highlighted.";
+  var click = ui ? ui.controlClick : "Click: Click on the card to read more information about that deity";
+  var redrawText = ui ? ui.controlRedraw : "Redraw: While the tree is resposive, there is a quirk where the preserved aspect ratio will cut off the tree. Click redraw to redraw the tree to fit your screen better.";
+  var reminder = ui ? ui.controlsReminder : "If you ever need a quick refresh of the controls, click the controls button on the top left.";
+  var langLabel = ui ? ui.langLabel || "Language" : "Language";
+
+  var langOptions = languages.map(function(lang){
+    var sel = lang === currentLang ? ' selected' : '';
+    var label = i18n[lang].langName || lang.toUpperCase();
+    return '<option value="'+lang+'"'+sel+'>'+label+'</option>';
+  }).join('\n                ');
+
+  this.html =
     `<div id="controlModal" class="w3-modal">
         <div class="w3-modal-content">
-            <header class="w3-container"> 
+            <header class="w3-container">
                 <span onclick="document.getElementById('controlModal').style.display='none'"class="w3-button w3-display-topright">&times;</span>
-                <h2>Greek Mythology Family Tree</h2>
+                <h2>${title}</h2>
             </header>
           <div class="w3-container">
-            <h4>Welcome to the messy and incestous world of Greek mythology! Here are the controls you might use to fully explore this weird family</h4>
+            <h4>${welcome}</h4>
             <ul>
-              <li>Zoom: Use either your trackpad or mouse scroll to zoom in and out of the family tree</li>
-              <li>Hover: Hover over a deity with children. All of that deity's children will highlighted.</li>
-              <li>Click: Click on the card to read more information about that deity</li>
-              <li>Redraw: While the tree is resposive, there is a quirk where the preserved aspect ratio will cut off the tree. Click redraw to redraw the tree to fit your screen better.</li>
+              <li>${zoom}</li>
+              <li>${hover}</li>
+              <li>${click}</li>
+              <li>${redrawText}</li>
             </ul>
-            <p>If you ever need a quick refresh of the controls, click the controls button on the top left.</p>
+            <p style="margin-top:16px"><strong>${langLabel}:</strong>
+              <select id="modalLangSelect" onchange="setLang(this.value);openControls();" style="margin-left:8px;padding:4px 8px;border-radius:8px;font-size:14px;">
+                ${langOptions}
+              </select>
+            </p>
+            <p>${reminder}</p>
           </div>
         </div>
     </div>`;
@@ -1442,39 +1674,57 @@ function controlsModal() {
 
 //make legend Modal object
 function legendModal() {
-  this.html = 
+  var ui = (currentLang !== 'en' && i18n[currentLang]) ? i18n[currentLang].ui : null;
+
+  var legendTitle = ui ? ui.legendTitle : "Legend";
+  var earthGods = ui ? ui.earthGods : "Earth Gods";
+  var skyGods = ui ? ui.skyGods : "Sky Gods";
+  var seaGods = ui ? ui.seaGods : "Sea Gods";
+  var personifications = ui ? ui.personifications : "Personifications";
+  var underworldGods = ui ? ui.underworldGods : "Underworld Gods";
+  var monsters = ui ? ui.monsters : "Monsters";
+  var mortals = ui ? ui.mortals : "Mortals &";
+  var demigods = ui ? "Demigods" : "Demigods";
+  if(ui && ui.mortals) { mortals = ui.mortals; demigods = ""; }
+  var spouseRel = ui ? ui.spouseRel : "Spouse relationship";
+  var childRel = ui ? ui.childRel : "Child relationship";
+  var nameLabel = ui ? ui.name : "Name";
+  var genderDomain = ui ? ui.genderDomain : "Gender &";
+  var domainLabel = ui ? ui.domainLabel : "Domain";
+
+  this.html =
     `<div id="legend" class="w3-modal">
         <div class="w3-modal-content">
-            <header class="w3-container"> 
+            <header class="w3-container">
                 <span onclick="document.getElementById('legend').style.display='none'"class="w3-button w3-display-topright">&times;</span>
-                <h2>Legend</h2>
+                <h2>${legendTitle}</h2>
             </header>
           <div class="w3-container legendContainer">
             <div>
                 <svg height="160px" width="500px">
                     <rect x="0" y="0" width="100" height="160" class="earth" rx="6" ry="6"></rect>
                     <image href="img/corgi.jpeg" x="10" y="10" height="80"></image>
-                    <text class="text-earth" x="50" y="110"> Name</text>
-                    <text class="domain-earth domain" x="50" y="130"> Gender & </text>
-                    <text class="domain-earth domain" x="50" y="145"> Domain </text>
+                    <text class="text-earth" x="50" y="110"> ${nameLabel}</text>
+                    <text class="domain-earth domain" x="50" y="130"> ${genderDomain} </text>
+                    <text class="domain-earth domain" x="50" y="145"> ${domainLabel} </text>
                     <rect x="120" y="0" width="90" height="40" class="earth" rx="6" ry="6"></rect>
-                    <text class="text-earth" x="165" y="20"> Earth Gods </text>
+                    <text class="text-earth" x="165" y="20"> ${earthGods} </text>
                     <rect x="120" y="60" width="90" height="40" class="sky" rx="6" ry="6"></rect>
-                    <text class="text-sky" x="165" y="80"> Sky Gods </text>
+                    <text class="text-sky" x="165" y="80"> ${skyGods} </text>
                     <rect x="120" y="120" width="90" height="40" class="water" rx="6" ry="6"></rect>
-                    <text class="text-water" x="165" y="140"> Sea Gods </text>
+                    <text class="text-water" x="165" y="140"> ${seaGods} </text>
                     <rect x="230" y="0" width="110" height="40" class="personification" rx="6" ry="6"></rect>
-                    <text class="domain-personification domain" x="285" y="20"> Personifications </text>
+                    <text class="domain-personification domain" x="285" y="20"> ${personifications} </text>
                     <rect x="230" y="60" width="110" height="40" class="underworld" rx="6" ry="6"></rect>
-                    <text class="domain-underworld domain" x="285" y="80"> Underworld Gods </text>
+                    <text class="domain-underworld domain" x="285" y="80"> ${underworldGods} </text>
                     <rect x="230" y="120" width="110" height="40" class="monster" rx="6" ry="6"></rect>
-                    <text class="text-monster" x="285" y="140"> Monsters </text>
+                    <text class="text-monster" x="285" y="140"> ${monsters} </text>
                     <rect x="360" y="0" width="110" height="40" class="mortal" rx="6" ry="6"></rect>
-                    <text class="domain-mortal domain" x="415" y="15"> Mortals & </text>
-                    <text class="domain-mortal domain" x="415" y="27"> Demigods </text>
-                    <text class="domain-monster domain" x="415" y="70"> Spouse relationship</text>
+                    <text class="domain-mortal domain" x="415" y="15"> ${mortals} </text>
+                    <text class="domain-mortal domain" x="415" y="27"> ${demigods} </text>
+                    <text class="domain-monster domain" x="415" y="70"> ${spouseRel}</text>
                     <line x1="360" y1="90" x2="470" y2="90" class="line-main spouse"/>
-                    <text class="domain-monster domain" x="415" y="130"> Child relationship</text>
+                    <text class="domain-monster domain" x="415" y="130"> ${childRel}</text>
                     <line x1="360" y1="150" x2="470" y2="150" class="line-main child"/>
                 </svg>
             </div>
@@ -1510,10 +1760,11 @@ function wrap(text, width) {
 }
 
 //write captions
-function caption(text,x,y){
+function caption(text,x,y,id){
     tree.append("text")
         .text(text)
         .attr("class",'caption')
+        .attr("id",id)
         .attr("x",x)
         .attr("y",y);
 }

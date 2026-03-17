@@ -12,6 +12,11 @@
       <!--  My Stylesheet  -->
       <link rel="stylesheet" type="text/css" href="style.css">
 
+      <!--  Greek Font  -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&display=swap" rel="stylesheet">
+
       <meta charset="utf-8" />
   </head>
   
@@ -20,16 +25,31 @@
           <button type="button" id="controls" onclick="openControls();">Controls</button>
           <button type="button" id="redraw" onclick="redraw();">Reset</button>
           <button type="button" id="legends" onclick="openLegend();">Legend</button>
+          <button type="button" id="greekBtn" onclick="toggleGreek();">Greek</button>
+          <select id="langBtn" onchange="setLang(this.value);"></select>
           <div id="familyTree"></div>
       </div>
       <div id="modalContainer"></div>
     
     <!-- God class -->
     <script src="god.js"></script>
-    
+
+    <!-- Translations (base + language files) -->
+    <script src="translations.js"></script>
+    <script src="lang/es.js"></script>
+    <script src="lang/ca.js"></script>
+    <script src="lang/el.js"></script>
+
     <!-- Javascript -->
     <script src="sketch.js"></script>
     <script>
+        (function(){
+            populateLangDropdown();
+            var browserLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase();
+            if(languages.indexOf(browserLang) !== -1 && browserLang !== 'en'){
+                setLang(browserLang);
+            }
+        })();
         openControls();
     </script>
   </body>
