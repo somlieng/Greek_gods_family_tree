@@ -40,6 +40,7 @@ class God{
     tooltip.append("text")
            .text(tooltipText)
            .attr("class",'tooltipText')
+           .attr("id",this.greekName+"TooltipText")
            .attr("x",this.x+(this.width/2))
            .attr("y",this.y-20);
     tree.append("rect") //add card
@@ -56,6 +57,7 @@ class God{
         tree.append("text") //text
             .text(this.greekName)
             .attr("class","text-"+this.godType)
+            .attr("id","name-"+this.greekName)
             .attr("x",this.x+(this.width/2))
             .attr("y",this.y+(this.height/2)-5);
          tree.append("text") //text
@@ -82,6 +84,7 @@ class God{
         tree.append("text") //name text
             .text(this.greekName)
             .attr("class","text-"+this.godType)
+            .attr("id","name-"+this.greekName)
             .attr("x",this.x+(this.width/2))
             .attr("y",this.y+picHeight+30);
         tree.append("text") //domain text

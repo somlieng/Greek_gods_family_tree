@@ -42,6 +42,38 @@ button{
 	left:20px;
 }
 
+#greekBtn{
+    top:170px;
+    left:20px;
+}
+
+#greekBtn.active{
+    background-color:#3F81AA;
+    border: 2px solid #FFF;
+}
+
+#langBtn{
+    position:fixed;
+    top:220px;
+    left:20px;
+    background-color:#222;
+    color:#FFF;
+    border-radius:20px;
+    text-align:center;
+    width:80px;
+    height:40px;
+    border:none;
+    font-size:14px;
+    cursor:pointer;
+    appearance:none;
+    -webkit-appearance:none;
+    padding:0 10px;
+}
+
+.greek-font{
+    font-family: 'GFS Didot', serif;
+}
+
 text{
     dominant-baseline: middle;
     text-anchor: middle;
